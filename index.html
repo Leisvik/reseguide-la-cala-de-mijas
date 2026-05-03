@@ -7,663 +7,442 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="apple-touch-icon" href="favicon.svg">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#1a1a2e">
+  <meta name="theme-color" content="#ffffff">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="La Cala">
   <style>
     :root {
-      --sand: #f5efe6;
-      --terracotta: #c0604a;
-      --terra-light: #e8866f;
-      --ocean: #2a7ca6;
-      --ocean-light: #4da6d4;
+      --bg: #F5F5F7;
+      --surface: #FFFFFF;
+      --accent: #C0604A;
+      --accent-soft: rgba(192,96,74,0.09);
+      --text: #1D1D1F;
+      --text-2: #6E6E73;
+      --text-3: #AEAEB2;
+      --border: rgba(0,0,0,0.07);
+      --shadow-sm: 0 1px 4px rgba(0,0,0,0.05), 0 4px 16px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.09);
+      --r: 14px;
+
+      /* legacy aliases used inline */
+      --sand: #F5F5F7;
+      --terracotta: #C0604A;
+      --terra-light: #D9755F;
+      --ocean: #3A7CA5;
       --olive: #6b7c4a;
       --white: #ffffff;
-      --text: #2c2c2c;
-      --text-muted: #6e6e6e;
       --card-bg: #ffffff;
-      --border: #e2d9d0;
-      --nav-bg: #1a1a2e;
+      --text-muted: #6E6E73;
+      --nav-bg: #1D1D1F;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: var(--sand);
+      font-family: -apple-system, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
       color: var(--text);
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ── HEADER ── */
+    /* ── HERO ── */
     .hero {
-      background: linear-gradient(160deg, #1a3a5c 0%, #2a7ca6 55%, #c0604a 100%);
-      padding: max(48px, calc(env(safe-area-inset-top) + 24px)) 24px 36px;
+      background: linear-gradient(170deg, #1C1C1E 0%, #2C3E50 60%, #3A7CA5 100%);
+      padding: max(52px, calc(env(safe-area-inset-top) + 28px)) 24px 32px;
       text-align: center;
-      position: relative;
-      overflow: hidden;
     }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='20'%3E%3Cpath d='M0 10 Q25 0 50 10 Q75 20 100 10 L100 20 L0 20Z' fill='rgba(255,255,255,0.05)'/%3E%3C/svg%3E") repeat-x bottom;
-      background-size: 100px 20px;
-    }
-    .hero-flag { font-size: 42px; margin-bottom: 8px; }
+    .hero-flag { font-size: 36px; margin-bottom: 12px; display: block; }
     .hero h1 {
-      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-size: clamp(1.5rem, 5vw, 2.4rem);
       color: #fff;
-      font-weight: 800;
+      font-weight: 700;
       letter-spacing: -0.5px;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      line-height: 1.2;
     }
     .hero-sub {
-      color: rgba(255,255,255,0.85);
-      margin-top: 8px;
-      font-size: 1rem;
-      letter-spacing: 1px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 6px;
+      font-size: 0.78rem;
+      letter-spacing: 2px;
       text-transform: uppercase;
+      font-weight: 500;
     }
     .hero-dates {
       display: inline-block;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.3);
-      color: #fff;
-      padding: 6px 18px;
-      border-radius: 20px;
-      font-size: 0.9rem;
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.9);
+      padding: 5px 16px;
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 500;
       margin-top: 14px;
-      backdrop-filter: blur(4px);
     }
     .hero-crew {
       display: block;
-      color: rgba(255,255,255,0.75);
-      font-size: 0.9rem;
-      margin-top: 10px;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.78rem;
+      margin-top: 8px;
       letter-spacing: 0.5px;
     }
 
-    /* ── NAV TABS ── */
+    /* ── NAV ── */
     .nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--nav-bg);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       display: flex;
+      border-bottom: 1px solid var(--border);
       overflow-x: hidden;
-      scrollbar-width: none;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
     }
-    .nav::-webkit-scrollbar { display: none; }
     .nav-btn {
       flex: 1;
-      padding: 12px 4px;
+      padding: 13px 4px;
       background: none;
       border: none;
-      color: rgba(255,255,255,0.55);
-      font-size: 0.85rem;
+      color: var(--text-3);
       cursor: pointer;
-      transition: all 0.2s;
+      transition: color 0.15s;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-bottom: 3px solid transparent;
+      border-bottom: 2px solid transparent;
       min-width: 0;
     }
-    .nav-btn:hover { color: #fff; }
     .nav-btn.active {
-      color: #fff;
-      border-bottom-color: var(--terra-light);
+      color: var(--accent);
+      border-bottom-color: var(--accent);
     }
-    .nav-icon { font-size: 1.5rem; }
+    .nav-icon { font-size: 1.4rem; }
 
-    /* ── MAIN CONTENT ── */
+    /* ── LAYOUT ── */
     .container {
-      max-width: 900px;
+      max-width: 860px;
       margin: 0 auto;
-      padding: 28px 16px max(60px, calc(env(safe-area-inset-bottom) + 40px));
+      padding: 24px 16px max(60px, calc(env(safe-area-inset-bottom) + 40px));
     }
-
     .section { display: none; }
     .section.active { display: block; }
 
     /* ── SECTION HEADER ── */
-    .section-header {
-      margin-bottom: 24px;
-    }
+    .section-header { margin-bottom: 20px; }
     .section-header h2 {
-      font-size: 1.6rem;
-      font-weight: 800;
+      font-size: 1.5rem;
+      font-weight: 700;
       color: var(--text);
+      letter-spacing: -0.3px;
     }
     .section-header p {
-      color: var(--text-muted);
-      margin-top: 4px;
-      font-size: 0.95rem;
+      color: var(--text-2);
+      margin-top: 3px;
+      font-size: 0.88rem;
     }
-    .divider {
-      height: 3px;
-      width: 48px;
-      background: var(--terracotta);
-      border-radius: 2px;
-      margin-top: 8px;
-    }
+    .divider { display: none; }
 
-    /* ── CARD GRID ── */
+    /* ── CARDS ── */
     .card-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 18px;
+      gap: 14px;
     }
-
-    /* ── CARD ── */
     .card {
-      background: var(--card-bg);
-      border-radius: 16px;
+      background: var(--surface);
+      border-radius: var(--r);
       overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-      transition: transform 0.2s, box-shadow 0.2s;
-      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s, transform 0.2s;
     }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-    }
+    .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
     .card-emoji {
-      height: 90px;
+      height: 72px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3rem;
+      font-size: 2.2rem;
+      background: var(--bg);
     }
-    .card-emoji.restaurants { background: linear-gradient(135deg, #fde8d8, #f5c6a8); }
-    .card-emoji.cafes { background: linear-gradient(135deg, #fef3d4, #fddea0); }
-    .card-emoji.trips { background: linear-gradient(135deg, #d4eaf7, #a8d4ee); }
-    .card-body { padding: 16px 18px 18px; }
-    .card-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
+    .card-emoji.restaurants, .card-emoji.cafes, .card-emoji.trips { background: var(--bg); }
+    .card-body { padding: 14px 16px 16px; }
+    .card-title { font-size: 1rem; font-weight: 600; margin-bottom: 4px; letter-spacing: -0.1px; }
     .card-tag {
       display: inline-block;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      padding: 2px 8px;
-      border-radius: 10px;
-      margin-bottom: 8px;
+      letter-spacing: 0.4px;
+      padding: 2px 7px;
+      border-radius: 100px;
+      margin-bottom: 7px;
     }
-    .tag-seafood { background: #dff0fa; color: #1a6d96; }
-    .tag-mediterranean { background: #d4edd6; color: #2d6a35; }
-    .tag-fine { background: #f3e8f8; color: #6d2f96; }
-    .tag-fusion { background: #ffe9d9; color: #a03000; }
-    .tag-local { background: #fef2d0; color: #8a5900; }
-    .tag-cafe { background: #fff0d4; color: #7a4d00; }
-    .tag-daytrip { background: #d8eaf7; color: #1a5f88; }
-    .tag-village { background: #e4f0d8; color: #3a6020; }
-    .tag-culture { background: #eee0f5; color: #5a2080; }
-    .card-desc {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.55;
-    }
+    .tag-seafood    { background: #EAF4FB; color: #1a6d96; }
+    .tag-mediterranean { background: #EAF3EA; color: #2d6a35; }
+    .tag-fine       { background: #F2EAF8; color: #6d2f96; }
+    .tag-fusion     { background: #FEF0E8; color: #a03000; }
+    .tag-local      { background: #FEF6E4; color: #8a5900; }
+    .tag-cafe       { background: #FEF6E4; color: #7a4d00; }
+    .tag-daytrip    { background: #E8F2FC; color: #1a5f88; }
+    .tag-village    { background: #EBF5E8; color: #3a6020; }
+    .tag-culture    { background: #F2EBF8; color: #5a2080; }
+    .card-desc { font-size: 0.85rem; color: var(--text-2); line-height: 1.55; }
     .card-footer {
       border-top: 1px solid var(--border);
-      padding: 10px 18px;
+      padding: 9px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    .card-meta {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .stars { color: #f5a623; font-size: 0.85rem; }
+    .card-meta { font-size: 0.76rem; color: var(--text-2); display: flex; align-items: center; gap: 4px; }
+    .stars { color: #f5a623; font-size: 0.82rem; }
 
-    /* ── TRIP CARD (wider layout) ── */
+    /* ── TRIP CARDS ── */
     .trip-card {
-      background: var(--card-bg);
-      border-radius: 16px;
+      background: var(--surface);
+      border-radius: var(--r);
       overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-      border: 1px solid var(--border);
-      margin-bottom: 18px;
-      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 12px;
+      transition: box-shadow 0.2s;
     }
-    .trip-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-    }
-    .trip-header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 18px 20px;
-      cursor: pointer;
-    }
+    .trip-card:hover { box-shadow: var(--shadow-md); }
+    .trip-header { display: flex; align-items: center; gap: 14px; padding: 16px 18px; cursor: pointer; }
     .trip-emoji-wrap {
-      width: 64px;
-      height: 64px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      flex-shrink: 0;
+      width: 56px; height: 56px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; flex-shrink: 0; background: var(--bg);
     }
-    .trip-emoji-wrap.blue { background: linear-gradient(135deg, #d4eaf7, #a8d4ee); }
-    .trip-emoji-wrap.green { background: linear-gradient(135deg, #d4edd6, #a8daa8); }
-    .trip-emoji-wrap.purple { background: linear-gradient(135deg, #ede0f5, #d4b8ea); }
-    .trip-emoji-wrap.gold { background: linear-gradient(135deg, #fef2d0, #f5d990); }
-    .trip-emoji-wrap.terra { background: linear-gradient(135deg, #fde8d8, #f5c6a8); }
+    .trip-emoji-wrap.blue, .trip-emoji-wrap.green,
+    .trip-emoji-wrap.purple, .trip-emoji-wrap.gold,
+    .trip-emoji-wrap.terra { background: var(--bg); }
     .trip-info { flex: 1; }
-    .trip-name { font-size: 1.15rem; font-weight: 700; }
-    .trip-sub { font-size: 0.85rem; color: var(--text-muted); margin-top: 2px; }
+    .trip-name { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.1px; }
+    .trip-sub { font-size: 0.82rem; color: var(--text-2); margin-top: 2px; }
     .trip-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
-    .badge {
-      font-size: 0.72rem;
-      padding: 2px 8px;
-      border-radius: 10px;
-      font-weight: 600;
-    }
-    .badge-drive { background: #e0eefd; color: #1a5f90; }
-    .badge-time { background: #e8f5e0; color: #2d6a20; }
-    .badge-tip { background: #fff0d4; color: #7a4d00; }
-    .trip-toggle {
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      transition: transform 0.2s;
-    }
+    .badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 100px; font-weight: 600; }
+    .badge-drive { background: #E8F2FC; color: #1a5f90; }
+    .badge-time  { background: #EBF5E8; color: #2d6a20; }
+    .badge-tip   { background: #FEF6E4; color: #7a4d00; }
+    .trip-toggle { font-size: 1rem; color: var(--text-3); transition: transform 0.2s; }
     .trip-card.open .trip-toggle { transform: rotate(180deg); }
     .trip-body {
-      display: none;
-      padding: 0 20px 20px;
-      border-top: 1px solid var(--border);
-      padding-top: 16px;
+      display: none; padding: 0 18px 18px;
+      border-top: 1px solid var(--border); padding-top: 14px;
     }
     .trip-card.open .trip-body { display: block; }
-    .highlight-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .highlight-list li {
-      display: flex;
-      gap: 10px;
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-    .highlight-list li::before {
-      content: '✦';
-      color: var(--terracotta);
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
+    .highlight-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .highlight-list li { display: flex; gap: 10px; font-size: 0.88rem; line-height: 1.55; }
+    .highlight-list li::before { content: '–'; color: var(--accent); flex-shrink: 0; font-weight: 700; }
     .trip-tip-box {
-      background: #fff8ed;
-      border-left: 3px solid #f5a623;
-      border-radius: 0 8px 8px 0;
-      padding: 10px 14px;
-      margin-top: 14px;
-      font-size: 0.85rem;
-      color: #5a4000;
+      background: #FFFBF0; border-left: 3px solid #f5a623;
+      border-radius: 0 8px 8px 0; padding: 10px 14px;
+      margin-top: 14px; font-size: 0.84rem; color: #5a4000;
     }
     .trip-tip-box strong { display: block; margin-bottom: 2px; color: #7a5500; }
 
-    /* ── INFO SECTION (overview) ── */
+    /* ── INFO GRID (overview) ── */
     .info-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 14px;
-      margin-bottom: 28px;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 10px;
+      margin-bottom: 24px;
     }
     .info-box {
-      background: var(--card-bg);
-      border-radius: 14px;
-      padding: 16px 18px;
-      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: var(--r);
+      padding: 16px 14px;
       text-align: center;
+      box-shadow: var(--shadow-sm);
     }
-    .info-box-icon { font-size: 1.8rem; margin-bottom: 6px; }
-    .info-box-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); }
-    .info-box-value { font-size: 1rem; font-weight: 700; margin-top: 2px; }
+    .info-box-icon { font-size: 1.6rem; margin-bottom: 6px; }
+    .info-box-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-3); font-weight: 600; }
+    .info-box-value { font-size: 0.9rem; font-weight: 700; margin-top: 3px; color: var(--text); }
 
     .overview-intro {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 22px 24px;
-      border: 1px solid var(--border);
-      margin-bottom: 22px;
-      font-size: 0.95rem;
+      background: var(--surface);
+      border-radius: var(--r);
+      padding: 20px 22px;
+      margin-bottom: 20px;
+      font-size: 0.92rem;
       line-height: 1.7;
-      color: var(--text);
+      color: var(--text-2);
+      box-shadow: var(--shadow-sm);
     }
     .overview-intro p + p { margin-top: 10px; }
 
     /* ── TIPS SECTION ── */
-    .tips-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 14px;
-    }
+    .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
     .tip-card {
-      background: var(--card-bg);
-      border-radius: 14px;
-      padding: 18px;
-      border: 1px solid var(--border);
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
+      background: var(--surface); border-radius: var(--r);
+      padding: 16px; display: flex; gap: 14px; align-items: flex-start;
+      box-shadow: var(--shadow-sm);
     }
     .tip-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      flex-shrink: 0;
-      background: var(--sand);
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0; background: var(--bg);
     }
-    .tip-content h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
-    .tip-content p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.5; }
+    .tip-content h4 { font-size: 0.92rem; font-weight: 600; margin-bottom: 3px; }
+    .tip-content p { font-size: 0.81rem; color: var(--text-2); line-height: 1.5; }
 
     /* ── FILTER BUTTONS ── */
-    .filter-row {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
+    .filter-row { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 18px; }
     .filter-btn {
-      padding: 6px 14px;
-      border-radius: 20px;
+      padding: 5px 13px;
+      border-radius: 100px;
       border: 1.5px solid var(--border);
-      background: var(--card-bg);
-      font-size: 0.82rem;
+      background: var(--surface);
+      font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.15s;
-      color: var(--text-muted);
+      color: var(--text-2);
     }
-    .filter-btn:hover { border-color: var(--terracotta); color: var(--terracotta); }
-    .filter-btn.active { background: var(--terracotta); color: #fff; border-color: var(--terracotta); }
+    .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
-    /* ── SHOPPING SECTION ── */
-  .sh-group-label {
-    font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 1px; color: var(--text-muted); margin-bottom: 12px;
-  }
-  .sh-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 14px;
-    margin-bottom: 4px;
-  }
-  .sh-card {
-    background: var(--card-bg); border-radius: 14px;
-    border: 1px solid var(--border); padding: 16px;
-    display: flex; gap: 14px; align-items: flex-start;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .sh-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
-  .sh-card-highlight { border-color: var(--terracotta); }
-  .sh-icon {
-    width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.3rem; font-weight: 900; color: #fff;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-  }
-  .sh-info { flex: 1; min-width: 0; }
-  .sh-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 2px; }
-  .sh-addr { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 6px; }
-  .sh-desc { font-size: 0.83rem; color: var(--text); line-height: 1.5; margin-bottom: 8px; }
-  .sh-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-  .sh-tag {
-    font-size: 0.72rem; font-weight: 600; padding: 2px 8px;
-    border-radius: 10px; background: var(--sand); color: var(--text-muted);
-  }
-  .sh-buys-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 12px;
-  }
-  .sh-buy {
-    background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border);
-    padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start;
-    font-size: 0.85rem; line-height: 1.5;
-  }
-  .sh-buy-icon { font-size: 1.6rem; flex-shrink: 0; }
+    /* ── SH (shopping/list cards) ── */
+    .sh-group-label {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--text-3); margin-bottom: 10px;
+    }
+    .sh-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px; margin-bottom: 4px;
+    }
+    .sh-card {
+      background: var(--surface); border-radius: var(--r);
+      padding: 15px; display: flex; gap: 13px; align-items: flex-start;
+      box-shadow: var(--shadow-sm); transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .sh-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .sh-card-highlight { box-shadow: 0 0 0 1.5px var(--accent), var(--shadow-sm); }
+    .sh-icon {
+      width: 42px; height: 42px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; color: #fff;
+    }
+    .sh-info { flex: 1; min-width: 0; }
+    .sh-name { font-weight: 600; font-size: 0.93rem; margin-bottom: 2px; }
+    .sh-addr { font-size: 0.73rem; color: var(--text-3); margin-bottom: 5px; }
+    .sh-desc { font-size: 0.82rem; color: var(--text-2); line-height: 1.5; margin-bottom: 7px; }
+    .sh-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+    .sh-tag {
+      font-size: 0.68rem; font-weight: 600; padding: 2px 7px;
+      border-radius: 100px; background: var(--bg); color: var(--text-2);
+    }
+    .sh-buys-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px;
+    }
+    .sh-buy {
+      background: var(--surface); border-radius: var(--r);
+      padding: 13px 15px; display: flex; gap: 12px; align-items: flex-start;
+      font-size: 0.84rem; line-height: 1.5; box-shadow: var(--shadow-sm);
+    }
+    .sh-buy-icon { font-size: 1.5rem; flex-shrink: 0; }
 
-  /* ── RECIPE CARDS ── */
-  .recipe-grid { display: flex; flex-direction: column; gap: 10px; }
-  .recipe-card {
-    background: var(--card-bg); border-radius: 14px;
-    border: 1px solid var(--border); overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    transition: box-shadow 0.2s;
-  }
-  .recipe-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
-  .recipe-header {
-    display: flex; align-items: center; gap: 14px;
-    padding: 14px 18px; cursor: pointer;
-  }
-  .recipe-emoji { font-size: 1.8rem; flex-shrink: 0; }
-  .recipe-meta { flex: 1; }
-  .recipe-name { font-weight: 700; font-size: 1rem; }
-  .recipe-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 1px; }
-  .recipe-toggle { font-size: 1rem; color: var(--text-muted); transition: transform 0.2s; }
-  .recipe-card.open .recipe-toggle { transform: rotate(180deg); }
-  .recipe-body {
-    display: none; padding: 0 18px 18px; border-top: 1px solid var(--border);
-    padding-top: 16px;
-  }
-  .recipe-card.open .recipe-body { display: block; }
-  .recipe-cols {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
-  }
-  .recipe-ing strong, .recipe-method strong {
-    display: block; font-size: 0.8rem; text-transform: uppercase;
-    letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 8px;
-  }
-  .recipe-ing ul { list-style: none; padding: 0; }
-  .recipe-ing ul li {
-    font-size: 0.85rem; padding: 3px 0;
-    border-bottom: 1px dashed var(--border);
-  }
-  .recipe-ing ul li:last-child { border-bottom: none; }
-  .recipe-method ol { padding-left: 18px; }
-  .recipe-method ol li { font-size: 0.85rem; margin-bottom: 5px; line-height: 1.5; }
-  .recipe-tip {
-    background: #fff8ed; border-left: 3px solid #f5a623;
-    border-radius: 0 8px 8px 0; padding: 8px 12px;
-    margin-top: 12px; font-size: 0.82rem; color: #5a4000;
-  }
-  @media (max-width: 520px) {
-    .recipe-cols { grid-template-columns: 1fr; }
-    .sh-grid { grid-template-columns: 1fr; }
-    .sh-buys-grid { grid-template-columns: 1fr; }
-  }
+    /* ── RECIPE CARDS ── */
+    .recipe-grid { display: flex; flex-direction: column; gap: 8px; }
+    .recipe-card {
+      background: var(--surface); border-radius: var(--r); overflow: hidden;
+      box-shadow: var(--shadow-sm); transition: box-shadow 0.2s;
+    }
+    .recipe-card:hover { box-shadow: var(--shadow-md); }
+    .recipe-header { display: flex; align-items: center; gap: 14px; padding: 14px 16px; cursor: pointer; }
+    .recipe-emoji { font-size: 1.7rem; flex-shrink: 0; }
+    .recipe-meta { flex: 1; }
+    .recipe-name { font-weight: 600; font-size: 0.95rem; }
+    .recipe-sub { font-size: 0.76rem; color: var(--text-2); margin-top: 1px; }
+    .recipe-toggle { font-size: 0.9rem; color: var(--text-3); transition: transform 0.2s; }
+    .recipe-card.open .recipe-toggle { transform: rotate(180deg); }
+    .recipe-body { display: none; padding: 0 16px 16px; border-top: 1px solid var(--border); padding-top: 14px; }
+    .recipe-card.open .recipe-body { display: block; }
+    .recipe-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .recipe-ing strong, .recipe-method strong {
+      display: block; font-size: 0.72rem; text-transform: uppercase;
+      letter-spacing: 0.5px; color: var(--text-3); margin-bottom: 8px; font-weight: 700;
+    }
+    .recipe-ing ul { list-style: none; padding: 0; }
+    .recipe-ing ul li { font-size: 0.83rem; padding: 3px 0; border-bottom: 1px solid var(--border); }
+    .recipe-ing ul li:last-child { border-bottom: none; }
+    .recipe-method ol { padding-left: 18px; }
+    .recipe-method ol li { font-size: 0.83rem; margin-bottom: 5px; line-height: 1.5; }
+    .recipe-tip {
+      background: #FFFBF0; border-left: 3px solid #f5a623;
+      border-radius: 0 8px 8px 0; padding: 8px 12px;
+      margin-top: 12px; font-size: 0.81rem; color: #5a4000;
+    }
 
-  /* ── IMAGE PLACEHOLDERS ── */
-  .img-placeholder {
-    width: 100%; height: 100%;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 6px;
-  }
-  .img-ph-icon { font-size: 1.8rem; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.3)); }
-  .img-ph-label {
-    font-size: 0.78rem; font-weight: 700;
-    color: rgba(255,255,255,0.95);
-    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
-    text-align: center; padding: 0 6px;
-  }
-  .gallery-item .img-placeholder .img-ph-icon { font-size: 2.4rem; }
-  .gallery-item .img-placeholder .img-ph-label { font-size: 0.9rem; }
+    /* ── GALLERY ── */
+    .gallery-group-label {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--text-3); margin-bottom: 10px;
+    }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .gallery-item {
+      position: relative; border-radius: var(--r); overflow: hidden;
+      cursor: pointer; aspect-ratio: 4/3; background: var(--border);
+      transition: transform 0.2s;
+    }
+    .gallery-item:hover { transform: scale(1.02); }
+    .gallery-item.gallery-wide { grid-column: span 2; aspect-ratio: 16/9; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .gallery-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.65));
+      color: #fff; font-size: 0.8rem; font-weight: 600;
+      padding: 24px 12px 10px; opacity: 0; transition: opacity 0.2s;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
 
-  /* ── PHOTO STRIP ── */
-  .photo-strip-wrap {
-    margin-bottom: 28px;
-    overflow: hidden;
-  }
-  .photo-strip {
-    display: flex;
-    gap: 12px;
-    overflow-x: auto;
-    padding-bottom: 10px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--terracotta) var(--border);
-    scroll-snap-type: x mandatory;
-  }
-  .photo-strip::-webkit-scrollbar { height: 4px; }
-  .photo-strip::-webkit-scrollbar-track { background: var(--border); border-radius: 2px; }
-  .photo-strip::-webkit-scrollbar-thumb { background: var(--terracotta); border-radius: 2px; }
-  .photo-strip-item {
-    flex: 0 0 220px;
-    scroll-snap-align: start;
-    border-radius: 12px;
-    overflow: hidden;
-    position: relative;
-    height: 150px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-  .photo-strip-item:hover { transform: scale(1.03); }
-  .photo-strip-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    background: var(--border);
-  }
-  .photo-strip-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0; right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.65));
-    color: #fff;
-    font-size: 0.78rem;
-    font-weight: 600;
-    padding: 18px 10px 8px;
-  }
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.92); z-index: 1000;
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 10px; object-fit: contain; }
+    .lightbox-caption {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: rgba(255,255,255,0.15); color: #fff;
+      padding: 8px 20px; border-radius: 100px; font-size: 0.88rem;
+      backdrop-filter: blur(6px); white-space: nowrap;
+    }
+    .lightbox-close {
+      position: fixed; top: 20px; right: 24px;
+      color: #fff; font-size: 2rem; cursor: pointer;
+      background: none; border: none; line-height: 1;
+    }
 
-  /* ── GALLERY ── */
-  .gallery-group-label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-muted);
-    margin-bottom: 12px;
-  }
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-  .gallery-item {
-    position: relative;
-    border-radius: 14px;
-    overflow: hidden;
-    cursor: pointer;
-    aspect-ratio: 4/3;
-    background: var(--border);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .gallery-item:hover { transform: scale(1.02); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
-  .gallery-item.gallery-wide {
-    grid-column: span 2;
-    aspect-ratio: 16/9;
-  }
-  .gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .gallery-overlay {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.7));
-    color: #fff;
-    font-size: 0.82rem;
-    font-weight: 600;
-    padding: 24px 14px 10px;
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-  .gallery-item:hover .gallery-overlay { opacity: 1; }
+    /* ── IMG PLACEHOLDERS ── */
+    .img-placeholder {
+      width: 100%; height: 100%; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 6px;
+    }
+    .img-ph-icon { font-size: 1.8rem; }
+    .img-ph-label { font-size: 0.76rem; font-weight: 600; color: rgba(255,255,255,0.9); text-align: center; }
 
-  /* ── LIGHTBOX ── */
-  .lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.92);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-  .lightbox.open { display: flex; }
-  .lightbox img {
-    max-width: 92vw;
-    max-height: 88vh;
-    border-radius: 10px;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
-    object-fit: contain;
-  }
-  .lightbox-caption {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(255,255,255,0.15);
-    color: #fff;
-    padding: 8px 20px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    backdrop-filter: blur(6px);
-    white-space: nowrap;
-  }
-  .lightbox-close {
-    position: fixed;
-    top: 20px; right: 24px;
-    color: #fff;
-    font-size: 2rem;
-    cursor: pointer;
-    background: none;
-    border: none;
-    line-height: 1;
-  }
-
-  /* ── RESPONSIVE ── */
+    /* ── RESPONSIVE ── */
     @media (max-width: 520px) {
       .card-grid { grid-template-columns: 1fr; }
       .info-grid { grid-template-columns: repeat(2, 1fr); }
-      .trip-header { gap: 12px; }
-      .trip-emoji-wrap { width: 52px; height: 52px; font-size: 1.6rem; }
+      .recipe-cols { grid-template-columns: 1fr; }
+      .sh-grid { grid-template-columns: 1fr; }
+      .sh-buys-grid { grid-template-columns: 1fr; }
+      .trip-emoji-wrap { width: 48px; height: 48px; font-size: 1.6rem; }
     }
 
-    /* ── SCROLL REVEAL (subtle fade) ── */
+    /* ── FADE IN ── */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
+      from { opacity: 0; transform: translateY(12px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .card, .trip-card, .info-box, .tip-card, .overview-intro {
-      animation: fadeUp 0.35s ease both;
+    .card, .trip-card, .info-box, .tip-card, .overview-intro, .sh-card, .sh-buy {
+      animation: fadeUp 0.3s ease both;
     }
   </style>
 </head>
@@ -740,22 +519,6 @@
       </div>
     </div>
 
-    <div style="background:linear-gradient(135deg,#1a3a5c,#2a5c8a);border-radius:16px;padding:20px 22px;margin-bottom:24px;color:#fff;">
-      <div style="font-size:1.5rem;margin-bottom:6px;">📱 Spara guiden som app på din iPhone</div>
-      <p style="font-size:0.88rem;color:rgba(255,255,255,0.8);margin:0 0 16px;">Öppna länken nedan i Safari och följ stegen — då fungerar guiden som en riktig app, utan adressfält.</p>
-      <div style="background:rgba(255,255,255,0.12);border-radius:10px;padding:10px 14px;font-size:0.9rem;font-weight:700;letter-spacing:0.3px;margin-bottom:16px;word-break:break-all;">
-        reseguide-la-cala-de-mijas.vercel.app
-      </div>
-      <ol style="margin:0;padding-left:20px;font-size:0.88rem;color:rgba(255,255,255,0.9);line-height:2;">
-        <li>Öppna länken ovan i <strong>Safari</strong></li>
-        <li>Tryck på <strong>dela-knappen</strong> <span style="background:rgba(255,255,255,0.2);border-radius:5px;padding:1px 6px;">⎙</span> längst ner i mitten</li>
-        <li>Scrolla ner och välj <strong>"Lägg till på hemskärmen"</strong></li>
-        <li>Ändra namnet till <strong>La Cala de Mijas</strong></li>
-        <li>Tryck på <strong>"Lägg till"</strong> uppe till höger</li>
-      </ol>
-      <p style="font-size:0.8rem;color:rgba(255,255,255,0.6);margin:12px 0 0;">Appen öppnas helskärm utan adressfält, precis som en vanlig app.</p>
-    </div>
-
     <div class="overview-intro">
       <p>La Cala de Mijas är en charmig kustby med drygt 5 000 invånare, klämd mellan Fuengirola och Marbella längs Costa del Sol. Hit söker sig de som vill ha en autentiskare upplevelse än de mer turistifierade grannstäderna — vita hus, en lång sandstrand och ett genuint lokalt liv som fortfarande pågår trots turismen.</p>
       <p>Med hyrbil är ni perfekt positionerade: Málaga stad ligger 35 minuter österut, Marbella 20 minuter västerut, och den dramatiska bergsstaden Ronda en dryg timme norrut. Kombinera avslappnade strandluncher med välplanerade dagsutflykter och kvällliga vinbarer — det är upplägget för en oförglömlig vecka.</p>
@@ -767,69 +530,10 @@
       <div class="divider"></div>
     </div>
 
-    <!-- PHOTO STRIP -->
-    <div class="photo-strip-wrap">
-      <div class="photo-strip">
-        <div class="photo-strip-item" onclick="openLightbox(this)">
-          <div class="img-placeholder" style="background:linear-gradient(160deg, #2a7ca6 0%, #5ab4d6 40%, #f5c98a 70%, #e8c97a 100%);"><span class="img-ph-icon">📍</span><span class="img-ph-label">Playa La Cala</span></div>
-          <div class="photo-strip-caption">🏖️ Playa La Cala</div>
-        </div>
-        <div class="photo-strip-item" onclick="openLightbox(this)">
-          <div class="img-placeholder" style="background:linear-gradient(135deg, #f5efe6 0%, #e8d5b8 40%, #c0604a 100%);">
-            <span class="img-ph-icon">📍</span>
-            <span class="img-ph-label">La Cala de Mijas</span>
-          </div>
-          <div class="photo-strip-caption">🏘️ La Cala de Mijas</div>
-        </div>
-        <div class="photo-strip-item" onclick="openLightbox(this)">
-          <div class="img-placeholder" style="background:linear-gradient(160deg, #1a3a5c 0%, #4a7a9e 50%, #8fac88 100%);">
-            <span class="img-ph-icon">📍</span>
-            <span class="img-ph-label">Ronda — Puente Nuevo</span>
-          </div>
-          <div class="photo-strip-caption">🌉 Ronda — Puente Nuevo</div>
-        </div>
-        <div class="photo-strip-item" onclick="openLightbox(this)">
-          <div class="img-placeholder" style="background:linear-gradient(135deg, #c0604a 0%, #e8866f 40%, #f5d08a 100%);">
-            <span class="img-ph-icon">📍</span>
-            <span class="img-ph-label">Málaga</span>
-          </div>
-          <div class="photo-strip-caption">🎨 Málaga — Alcazaba</div>
-        </div>
-        <div class="photo-strip-item" onclick="openLightbox(this)">
-          <div class="img-placeholder" style="background:linear-gradient(160deg, #2a5c8a 0%, #4a9aba 50%, #f5e8d0 100%);">
-            <span class="img-ph-icon">📍</span>
-            <span class="img-ph-label">Marbella</span>
-          </div>
-          <div class="photo-strip-caption">⚓ Marbella</div>
-        </div>
-        <div class="photo-strip-item" onclick="openLightbox(this)">
-          <div class="img-placeholder" style="background:linear-gradient(135deg, #ffffff 0%, #f0ede8 30%, #6b7c4a 100%);">
-            <span class="img-ph-icon">📍</span>
-            <span class="img-ph-label">Frigiliana</span>
-          </div>
-          <div class="photo-strip-caption">🏘️ Frigiliana</div>
-        </div>
-        <div class="photo-strip-item" onclick="openLightbox(this)">
-          <div class="img-placeholder" style="background:linear-gradient(160deg, #f5a623 0%, #e8866f 50%, #1a3a5c 100%);">
-            <span class="img-ph-icon">📍</span>
-            <span class="img-ph-label">Mijas Pueblo</span>
-          </div>
-          <div class="photo-strip-caption">🫏 Mijas Pueblo</div>
-        </div>
-        <div class="photo-strip-item" onclick="openLightbox(this)">
-          <div class="img-placeholder" style="background:linear-gradient(160deg, #3a3a3a 0%, #6a6a5a 40%, #a8c890 100%);">
-            <span class="img-ph-icon">📍</span>
-            <span class="img-ph-label">Setenil de las Bodegas</span>
-          </div>
-          <div class="photo-strip-caption">🪨 Setenil de las Bodegas</div>
-        </div>
-      </div>
-    </div>
-
     <div style="background:var(--card-bg);border-radius:16px;border:1px solid var(--border);overflow:hidden;">
       <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
         <thead>
-          <tr style="background:var(--nav-bg);color:#fff;">
+          <tr style="background:#1D1D1F;color:#fff;">
             <th style="padding:10px 16px;text-align:left;font-weight:600;">Dag</th>
             <th style="padding:10px 16px;text-align:left;font-weight:600;">Förslag</th>
           </tr>
@@ -837,35 +541,35 @@
         <tbody>
           <tr style="border-bottom:1px solid var(--border);">
             <td style="padding:12px 16px;font-weight:700;white-space:nowrap;">Lör 9/5</td>
-            <td style="padding:12px 16px;color:var(--text-muted);">Ankomst · Checka in · Avslappnad strandpromenad · Enkel middag på lokalt ställe</td>
+            <td style="padding:12px 16px;color:var(--text-muted);">Ankomst · Checka in · 🛒 <strong>Proviantera på Mercadona</strong> (drycker, frukost, mellanmål) · Promenad längs stranden · Enkel middag på El Cortijillo</td>
           </tr>
           <tr style="border-bottom:1px solid var(--border);background:#fafafa;">
             <td style="padding:12px 16px;font-weight:700;">Sön 10/5</td>
-            <td style="padding:12px 16px;color:var(--text-muted);">Utforska La Cala · Frukost på Bsweet · Strand · Middag på The Little Geranium</td>
+            <td style="padding:12px 16px;color:var(--text-muted);">Frukost på Bsweet · Utforska La Cala till fots · Strand på eftermiddagen · Aperitivo på La Bodeguita · Middag på The Little Geranium</td>
           </tr>
           <tr style="border-bottom:1px solid var(--border);">
             <td style="padding:12px 16px;font-weight:700;">Mån 11/5</td>
-            <td style="padding:12px 16px;color:var(--text-muted);">Dagsutflykt till <strong>Málaga</strong> · Picasso Museum · Tapas i gamla stan</td>
+            <td style="padding:12px 16px;color:var(--text-muted);"><strong>Málaga</strong> — Alcazaba + Gibralfaro (fm) · Picasso Museum efter lunch · Tapas &amp; vinbarer i Soho-kvarteret på kvällen · Hem sent</td>
           </tr>
           <tr style="border-bottom:1px solid var(--border);background:#fafafa;">
             <td style="padding:12px 16px;font-weight:700;">Tis 12/5</td>
-            <td style="padding:12px 16px;color:var(--text-muted);">Lugn dag · Café de la Plaza · Strand · Middag på La Familia Chiringuito</td>
+            <td style="padding:12px 16px;color:var(--text-muted);"><strong>Mijas Pueblo</strong> (fm) — åsneridning &amp; utsikt · Lunch i byn · <strong>Fuengirola marknad</strong> (em) · Middag på Kiosko Cristóbal vid stranden</td>
           </tr>
           <tr style="border-bottom:1px solid var(--border);">
             <td style="padding:12px 16px;font-weight:700;">Ons 13/5</td>
-            <td style="padding:12px 16px;color:var(--text-muted);">Dagsutflykt till <strong>Ronda</strong> · Puente Nuevo · Lunch med utsikt</td>
+            <td style="padding:12px 16px;color:var(--text-muted);"><strong>Ronda</strong> — Puente Nuevo &amp; gamla stan (fm) · Lunch med utsikt · <strong>Setenil de las Bodegas</strong> (em, 30 min från Ronda) — hus under klipporna · Hem via solnedgångsvägen</td>
           </tr>
           <tr style="border-bottom:1px solid var(--border);background:#fafafa;">
             <td style="padding:12px 16px;font-weight:700;">Tor 14/5</td>
-            <td style="padding:12px 16px;color:var(--text-muted);">Dagsutflykt till <strong>Marbella</strong> · Gamla stan · Puerto Banús · Vinbar</td>
+            <td style="padding:12px 16px;color:var(--text-muted);"><strong>Marbella</strong> — gamla stan &amp; Plaza de los Naranjos (fm) · Lunch på strandpromenaden · <strong>Puerto Banús</strong> (em) — yachter &amp; shopping · Aperitivo &amp; sen hemfärd</td>
           </tr>
           <tr style="border-bottom:1px solid var(--border);">
             <td style="padding:12px 16px;font-weight:700;">Fre 15/5</td>
-            <td style="padding:12px 16px;color:var(--text-muted);">Dagsutflykt <strong>Frigiliana + Nerja</strong> · Vitt byknas labyrinter · Balkong mot Europa</td>
+            <td style="padding:12px 16px;color:var(--text-muted);"><strong>Frigiliana</strong> (fm) — ett av Spaniens vackraste vita byar · Lunch i byn · <strong>Nerja</strong> (em, 20 min) — Balcón de Europa &amp; grottorna · Sista middag på PAUZA</td>
           </tr>
           <tr>
             <td style="padding:12px 16px;font-weight:700;">Lör 16/5</td>
-            <td style="padding:12px 16px;color:var(--text-muted);">Sista frukost på havet · Sista strand · Avresa</td>
+            <td style="padding:12px 16px;color:var(--text-muted);">Sista frukost vid havet · Avslappnad morgon · Packa &amp; avresa</td>
           </tr>
         </tbody>
       </table>
@@ -886,6 +590,12 @@
       <button class="filter-btn" onclick="filterCards(this, 'fine')">Finmiddag</button>
       <button class="filter-btn" onclick="filterCards(this, 'mediterranean')">Medelhav</button>
       <button class="filter-btn" onclick="filterCards(this, 'fusion')">Fusion</button>
+    </div>
+
+    <div class="filter-row" style="margin-top:8px;">
+      <button class="filter-btn" style="background:rgba(192,96,74,0.12);color:var(--terracotta);border:1px solid rgba(192,96,74,0.3);" onclick="document.getElementById('anchor-tapas').scrollIntoView({behavior:'smooth'})">🫒 Tapas</button>
+      <button class="filter-btn" style="background:rgba(192,160,32,0.12);color:#8a6a00;border:1px solid rgba(192,160,32,0.3);" onclick="document.getElementById('anchor-paella').scrollIntoView({behavior:'smooth'})">🥘 Paella</button>
+      <button class="filter-btn" style="background:rgba(42,124,166,0.12);color:var(--ocean);border:1px solid rgba(42,124,166,0.3);" onclick="document.getElementById('anchor-hidden').scrollIntoView({behavior:'smooth'})">🙈 Lokalt</button>
     </div>
 
     <div class="card-grid" id="restaurant-grid">
@@ -1062,7 +772,7 @@
     </div>
 
     <!-- TAPAS -->
-    <div class="sh-group-label" style="margin-top:32px;">🫒 Bästa tapasställena — och vad ni måste beställa</div>
+    <div id="anchor-tapas" class="sh-group-label" style="margin-top:32px;">🫒 Bästa tapasställena — och vad ni måste beställa</div>
     <div class="sh-grid">
       <div class="sh-card sh-card-highlight">
         <div class="sh-icon" style="background:linear-gradient(135deg,#c0604a,#e8866f);">⭐</div>
@@ -1115,7 +825,7 @@
     </div>
 
     <!-- PAELLA -->
-    <div class="sh-group-label" style="margin-top:32px;">🥘 Bästa paellarestaurangerna</div>
+    <div id="anchor-paella" class="sh-group-label" style="margin-top:32px;">🥘 Bästa paellarestaurangerna</div>
     <div class="overview-intro" style="margin-bottom:16px;font-size:0.88rem;">
       <p><strong>Viktigt om paella:</strong> Äkta paella tar 20–30 minuter att laga och görs alltid på beställning. Undvik ställen som har paellan "klar" i ett fat — det är turistfällan. Beställ alltid för minst 2 personer, och gärna i förväg om ni vet att ni vill ha det.</p>
     </div>
@@ -1159,7 +869,7 @@
     </div>
 
     <!-- LOKALA GÖMSLEN -->
-    <div class="sh-group-label" style="margin-top:32px;">🙈 Bara lokalbefolkningen vet — gömslen utanför turiststråket</div>
+    <div id="anchor-hidden" class="sh-group-label" style="margin-top:32px;">🙈 Bara lokalbefolkningen vet — gömslen utanför turiststråket</div>
     <div class="overview-intro" style="margin-bottom:16px;font-size:0.88rem;">
       <p>De här ställena hittar du inte i turistbroschyrerna. De saknar engelska skyltar, Google-annonser och instagramfilter — men de spanska familjerna som fyller borden varje helg vet vad de gör.</p>
     </div>
@@ -1242,6 +952,27 @@
       <h2>Caféer & mysiga ställen</h2>
       <div class="divider"></div>
       <p>De bästa kaffestoppen och avslappnade platserna i La Cala</p>
+    </div>
+
+    <!-- KAFFEORDLISTA -->
+    <div class="sh-group-label">☕ Så beställer du kaffe i Spanien</div>
+    <div class="sh-buys-grid" style="margin-bottom:32px;">
+      <div class="sh-buy"><span class="sh-buy-icon">☕</span><div><strong>Café solo</strong><br><span>En rak espresso. Det spanjorerna själva dricker. Liten, stark och god.</span></div></div>
+      <div class="sh-buy"><span class="sh-buy-icon">🥛</span><div><strong>Café con leche</strong><br><span>Hälften espresso, hälften varm mjölk. Klassikern till frukost. Perfekt med en tostada.</span></div></div>
+      <div class="sh-buy"><span class="sh-buy-icon">🧊</span><div><strong>Café con hielo</strong><br><span>Espresso serverad med ett glas is vid sidan — häll själv. Perfekt när det är varmt.</span></div></div>
+      <div class="sh-buy"><span class="sh-buy-icon">🍫</span><div><strong>Cortado</strong><br><span>Espresso med en skvätt mjölk. Mindre än café con leche, starkare och krämigare.</span></div></div>
+      <div class="sh-buy"><span class="sh-buy-icon">🫧</span><div><strong>Café bombón</strong><br><span>Espresso med kondenserad mjölk i botten — sött, krämigt och lite annorlunda. Värt att prova.</span></div></div>
+      <div class="sh-buy"><span class="sh-buy-icon">💡</span><div><strong>Tips: Tostada con aceite</strong><br><span>Beställ alltid en rostad brödskiva med olivolja och tomat till kaffet. Kostar knappt något och är frukost på spanskt vis.</span></div></div>
+    </div>
+
+    <div class="sh-group-label">🥐 Bakverk du måste prova</div>
+    <div class="sh-buys-grid" style="margin-bottom:32px;">
+      <div class="sh-buy"><span class="sh-buy-icon">🥐</span><div><strong>Croissant de mantequilla</strong><br><span>Smörigt, flagnande och i bästa fall nybakat. Spanska bageri-croissanter är oftast bättre än de låter.</span></div></div>
+      <div class="sh-buy"><span class="sh-buy-icon">🍩</span><div><strong>Churros con chocolate</strong><br><span>Friterade degstänger med tjock varm chokladsås att doppa i. Morgonklassiker — bäst vid en churrería.</span></div></div>
+      <div class="sh-buy"><span class="sh-buy-icon">🍮</span><div><strong>Napolitana de chocolate</strong><br><span>En slags wienerbröd fyllt med chokladkräm. Finns i varje bageri och är svårt att säga nej till.</span></div></div>
+      <div class="sh-buy"><span class="sh-buy-icon">🧁</span><div><strong>Ensaimada</strong><br><span>Luftigt, spiralformat bakverk med florsocker från Mallorca. Mjukt och lätt — perfekt till morgonkaffet.</span></div></div>
+      <div class="sh-buy"><span class="sh-buy-icon">🍪</span><div><strong>Polvorones</strong><br><span>Smuliga mandel- och spenatkakor som smälter i munnen. Traditionellt julbak — men finns året om i södra Spanien.</span></div></div>
+      <div class="sh-buy"><span class="sh-buy-icon">🍞</span><div><strong>Pan con tomate</strong><br><span>Rostat bröd gnuggat med tomat och ringat med olivolja. Enkelt, billigt och omöjligt att sluta äta.</span></div></div>
     </div>
 
     <div class="card-grid">
