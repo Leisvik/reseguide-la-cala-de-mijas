@@ -361,6 +361,61 @@
     }
     .weather-error { padding: 20px; text-align: center; color: var(--text-3); font-size: 0.85rem; }
 
+    /* ── VIN ── */
+    .wine-card {
+      background: var(--surface);
+      border-radius: var(--r);
+      box-shadow: var(--shadow-sm);
+      padding: 16px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .wine-card-icon { font-size: 2rem; flex-shrink: 0; line-height: 1; margin-top: 2px; }
+    .wine-card-body { flex: 1; min-width: 0; }
+    .wine-card-name { font-size: 1rem; font-weight: 700; color: var(--text); line-height: 1.2; }
+    .wine-card-producer { font-size: 0.78rem; color: var(--text-2); margin-top: 2px; }
+    .wine-card-desc { font-size: 0.84rem; color: var(--text-2); margin-top: 6px; line-height: 1.5; }
+    .wine-card-footer { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+    .wine-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 100px;
+      letter-spacing: 0.3px;
+    }
+    .wine-badge-red    { background: #fce8e8; color: #9a1010; }
+    .wine-badge-white  { background: #fdf6e0; color: #7a6000; }
+    .wine-badge-sweet  { background: #fce8d0; color: #8a4000; }
+    .wine-badge-rose   { background: #fce8f2; color: #9a2060; }
+    .wine-badge-grape  { background: var(--bg); color: var(--text-2); }
+    .wine-badge-find   { background: rgba(192,96,74,0.1); color: var(--accent); }
+    .wine-badge-star   { background: #fffbea; color: #8a6000; }
+    .wine-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; }
+    .wine-history-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px; }
+    @media (max-width: 480px) { .wine-history-grid { grid-template-columns: 1fr; } }
+    .wine-fact-card {
+      background: var(--surface);
+      border-radius: var(--r);
+      box-shadow: var(--shadow-sm);
+      padding: 16px;
+    }
+    .wine-fact-icon { font-size: 1.6rem; margin-bottom: 6px; }
+    .wine-fact-title { font-size: 0.88rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .wine-fact-text { font-size: 0.82rem; color: var(--text-2); line-height: 1.55; }
+    .wine-order-box {
+      background: linear-gradient(135deg, #1D1D1F 0%, #2c1810 100%);
+      border-radius: var(--r);
+      padding: 20px;
+      color: #fff;
+      margin-top: 8px;
+    }
+    .wine-order-box h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 12px; color: #f0d060; }
+    .wine-order-line { font-size: 0.84rem; line-height: 1.6; color: rgba(255,255,255,0.8); margin-bottom: 6px; }
+    .wine-order-line strong { color: #f0d060; font-style: italic; }
+    .wine-order-line em { color: rgba(255,255,255,0.55); font-size: 0.78rem; }
+
     .overview-intro {
       background: var(--surface);
       border-radius: var(--r);
@@ -574,6 +629,9 @@
   </button>
   <button class="nav-btn" onclick="showSection('shopping', this)" title="Mat & Handel">
     <span class="nav-icon">🛒</span>
+  </button>
+  <button class="nav-btn" onclick="showSection('wine', this)" title="Vin">
+    <span class="nav-icon">🍷</span>
   </button>
   <button class="nav-btn" onclick="showSection('shoppingfashion', this)" title="Shopping">
     <span class="nav-icon">🛍️</span>
@@ -2131,6 +2189,405 @@
       </div>
 
     </div>
+  </section>
+
+  <!-- ══ VIN ══ -->
+  <section id="wine" class="section">
+    <div class="section-header">
+      <h2>Vin från Málaga</h2>
+      <div class="divider"></div>
+      <p>En av världens äldsta — och mest underskattade — vinregioner, på er tröskel</p>
+    </div>
+
+    <div class="overview-intro">
+      <p>Málaga var en gång ett av världens mest berömda vinnamn. Drottning Victoria drack det. Napoleon älskade det. Shakepeare nämnde det. Under 1800-talets mitt var Málagas provins Spaniens näst största vinregion med 100 000 hektar vingårdar. Sedan slog phylloxera till 1878 och förstörde nästan allt. Regionen kraschade och glömdes bort i nästan ett sekel.</p>
+      <p>Idag pågår en tyst revolution. DO Sierras de Málaga grundades 2001 och öppnade för moderna torra bords­viner. En handfull ambitiösa producenter — många utlänningar som förälskade sig i regionen — håller nu på att återupptäcka urgamla druvor, extrema bergs­terroir och en stil som är helt unik i Spanien. Ni är på rätt plats vid rätt tidpunkt.</p>
+    </div>
+
+    <!-- SNABBNAVIGATION -->
+    <div class="filter-row" style="margin-bottom:24px;">
+      <button class="filter-btn" style="background:rgba(192,96,74,0.1);color:var(--accent);border:1px solid rgba(192,96,74,0.25);" onclick="document.getElementById('wine-history').scrollIntoView({behavior:'smooth'})">🌍 Historia</button>
+      <button class="filter-btn" style="background:rgba(192,96,74,0.1);color:var(--accent);border:1px solid rgba(192,96,74,0.25);" onclick="document.getElementById('wine-producers').scrollIntoView({behavior:'smooth'})">🏆 Producenter</button>
+      <button class="filter-btn" style="background:rgba(192,96,74,0.1);color:var(--accent);border:1px solid rgba(192,96,74,0.25);" onclick="document.getElementById('wine-reds').scrollIntoView({behavior:'smooth'})">🔴 Röda</button>
+      <button class="filter-btn" style="background:rgba(192,96,74,0.1);color:var(--accent);border:1px solid rgba(192,96,74,0.25);" onclick="document.getElementById('wine-whites').scrollIntoView({behavior:'smooth'})">⚪ Vita</button>
+      <button class="filter-btn" style="background:rgba(192,96,74,0.1);color:var(--accent);border:1px solid rgba(192,96,74,0.25);" onclick="document.getElementById('wine-sweet').scrollIntoView({behavior:'smooth'})">🍯 Söta</button>
+      <button class="filter-btn" style="background:rgba(192,96,74,0.1);color:var(--accent);border:1px solid rgba(192,96,74,0.25);" onclick="document.getElementById('wine-find').scrollIntoView({behavior:'smooth'})">📍 Hitta</button>
+    </div>
+
+    <!-- HISTORIA & TERROIR -->
+    <div id="wine-history" class="sh-group-label">🌍 Historia, terroir och druvor</div>
+    <div class="wine-history-grid">
+      <div class="wine-fact-card">
+        <div class="wine-fact-icon">🏺</div>
+        <div class="wine-fact-title">3 000 år gammal historia</div>
+        <div class="wine-fact-text">Fenicier­na tog med sig Moscatel de Alejandría till Málaga ca 800 f.Kr. Greker, romare och arabers alla odlade vinet vidare. Under 1800-talets guldålder exporterades "Mountain Wine" till hela världen — favorit hos bland annat Katarina den store, Napoleon och Drottning Victoria.</div>
+      </div>
+      <div class="wine-fact-card">
+        <div class="wine-fact-icon">🦟</div>
+        <div class="wine-fact-title">Phylloxera och fallet</div>
+        <div class="wine-fact-text">1878 slog rotlusen Phylloxera till i Málaga — före resten av Spanien. 100 000 hektar vingårdar förstördes. Industrin kollapsade. Regionen glömdes bort som vinproducent i nästan ett sekel och levde vidare bara som ett nisch-namn för söta dessertviner.</div>
+      </div>
+      <div class="wine-fact-card">
+        <div class="wine-fact-icon">🌄</div>
+        <div class="wine-fact-title">Terroir: berg möter hav</div>
+        <div class="wine-fact-text">Ronda-området ligger på 700–900 meters höjd med skiffer­mark (pizarra) — perfekt för vita viner med mineralitet och syra. Axarquía vid kusten har branta bergs­sluttningar med urgamla Moscatel-vinstockar på lerskiffer. Havsbrisen skapar en unik kombination av värme och friskhet.</div>
+      </div>
+      <div class="wine-fact-card">
+        <div class="wine-fact-icon">🍇</div>
+        <div class="wine-fact-title">Lokala druvor att känna igen</div>
+        <div class="wine-fact-text"><strong>Moscatel de Alejandría</strong> — Málagas signatur, ger aromatiska torra vita och söta viner. <strong>Pedro Ximénez (PX)</strong> — klassisk söt druva. <strong>Romé / Romí</strong> — unik röd urdruvav som Bentomiz och La Melonera plockat upp från glömska. <strong>Tintilla de Rota</strong> — sällsynt gammal röd sort. <strong>Doradilla</strong> — lokal vit druva.</div>
+      </div>
+      <div class="wine-fact-card">
+        <div class="wine-fact-icon">🏷️</div>
+        <div class="wine-fact-title">DO Málaga vs Sierras de Málaga</div>
+        <div class="wine-fact-text"><strong>DO Málaga</strong> — den gamla klassiska appellationen, framförallt söta och förstärkta viner (Moscatel, PX). <strong>DO Sierras de Málaga</strong> — grundad 2001, tillåter torra moderna bordsviner. Det är här den spännande moderna revolutionen sker. Fråga alltid specifikt efter "Sierras de Málaga" på restaurang.</div>
+      </div>
+      <div class="wine-fact-card">
+        <div class="wine-fact-icon">🌱</div>
+        <div class="wine-fact-title">Den moderna revolutionen</div>
+        <div class="wine-fact-text">Jorge Ordóñez (malagueno, baserad i USA) lanserade 2004 Botani — Spaniens första moderna torra Moscatel — och visade att världsklass­vita viner kunde komma från regionen. Holländska paret bakom Bentomiz, samt en rad ambitiösa Ronda-producenter, har sedan dess byggt upp en region värd att uppmärksamma.</div>
+      </div>
+    </div>
+
+    <!-- PRODUCENTER -->
+    <div id="wine-producers" class="sh-group-label" style="margin-top:28px;">🏆 De bästa producenterna — lär er dessa namn</div>
+    <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:14px;">Om ni bara minns ett enda: <strong>Bentomiz</strong>. Men de andra är minst lika värda att upptäcka.</p>
+    <div class="sh-grid">
+
+      <div class="sh-card sh-card-highlight">
+        <div class="sh-icon" style="background:linear-gradient(135deg,#8a1a2a,#c03050);">⭐</div>
+        <div class="sh-info">
+          <div class="sh-name">Bodegas Bentomiz</div>
+          <div class="sh-addr">Axarquía · DO Sierras de Málaga</div>
+          <div class="sh-desc">Holländska paret Clara Verheij och André Both köpte vingårdar med 80–100 år gamla Moscatel-stockar på skiffer i Axarquía 2005. Deras <em>Ariyanas</em>-serie är regionens mest hyllade moderna viner. Flaggskepp: <strong>Ariyanas Seco Sobre Lías</strong> — torr Moscatel av toppklass. Exporterar till Sverige via MarBec AB.</div>
+          <div class="sh-tags"><span class="sh-tag">⭐ Regionens bästa</span><span class="sh-tag">🇸🇪 Exporterar till Sverige</span></div>
+        </div>
+      </div>
+
+      <div class="sh-card">
+        <div class="sh-icon" style="background:linear-gradient(135deg,#1a3a6a,#3060a0);">🐐</div>
+        <div class="sh-info">
+          <div class="sh-name">La Melonera</div>
+          <div class="sh-addr">Serranía de Ronda · DO Sierras de Málaga</div>
+          <div class="sh-desc">Specialiserad på att återuppväcka glömda lokala druvor — Romé, Tintilla de Rota, Doradilla. Deras <strong>Payoya Negra</strong> (uppkallad efter en lokal getras) fick 92 poäng av Falstaff och är ett av regionens mest spännande röda viner. Unik terroir-driven stil.</div>
+          <div class="sh-tags"><span class="sh-tag">🍇 Unika lokala druvor</span><span class="sh-tag">92 pts Falstaff</span></div>
+        </div>
+      </div>
+
+      <div class="sh-card">
+        <div class="sh-icon" style="background:linear-gradient(135deg,#3a6a1a,#60a030);">🌿</div>
+        <div class="sh-info">
+          <div class="sh-name">Huerto de la Condesa</div>
+          <div class="sh-addr">Ronda · DO Sierras de Málaga</div>
+          <div class="sh-desc">Ung producent (första årgång 2019) på historisk mark i Guadalcobacín-dalen. Deras <strong>Los Cipreses Tinto</strong> (50% Garnacha + 50% Syrah) fick utmärkelsen "Embajador de Andalucía". Elegant, med lite Rhône-känsla — ett av Rondas bästa röda.</div>
+          <div class="sh-tags"><span class="sh-tag">🏅 Embajador de Andalucía</span><span class="sh-tag">🆕 Ny stjärna</span></div>
+        </div>
+      </div>
+
+      <div class="sh-card">
+        <div class="sh-icon" style="background:linear-gradient(135deg,#6a1a6a,#a030a0);">🍾</div>
+        <div class="sh-info">
+          <div class="sh-name">Jorge Ordóñez &amp; Co</div>
+          <div class="sh-addr">Axarquía · DO Sierras de Málaga</div>
+          <div class="sh-desc">Malagueno baserad i USA som 2004 lanserade <strong>Botani</strong> — Spaniens första moderna torra Moscatel — och förändrade regionens rykte för alltid. Deras Nº2 Victoria var det första spanska vin som serverades vid Nobelprissmiddagen (2012). Mest internationellt distribuerade Málaga-producenten.</div>
+          <div class="sh-tags"><span class="sh-tag">🎖️ Nobel-vin 2012</span><span class="sh-tag">🌍 Internationellt känd</span></div>
+        </div>
+      </div>
+
+      <div class="sh-card">
+        <div class="sh-icon" style="background:linear-gradient(135deg,#6a3a1a,#a06030);">🌊</div>
+        <div class="sh-info">
+          <div class="sh-name">Victoria Ordóñez</div>
+          <div class="sh-addr">Málaga stad · DO Sierras de Málaga</div>
+          <div class="sh-desc">Jorges syster, eget projekt sedan 2015 vid foten av Montes de Málaga. Gör <strong>Voladeros</strong> (torr PX, hyllning till historiska Mountain Wine-stilen) och det eleganta <strong>Monticara</strong>. Enda producenten med vingård inom Málagas stadsgränser. Boutique och unik.</div>
+          <div class="sh-tags"><span class="sh-tag">🏙️ Inom Málaga stad</span><span class="sh-tag">✨ Boutique</span></div>
+        </div>
+      </div>
+
+      <div class="sh-card">
+        <div class="sh-icon" style="background:linear-gradient(135deg,#1a5a3a,#2a9060);">♻️</div>
+        <div class="sh-info">
+          <div class="sh-name">Bodega Gross Hermanos</div>
+          <div class="sh-addr">Sierra del Torcal, Antequera · DO Sierras de Málaga</div>
+          <div class="sh-desc">Fantastisk återkomsthistoria: familjen Gross var en av 1800-talets stora vindynastier i Málaga — tyska emigranter som byggde upp handelsimperium. Phylloxera slog ut allt. 2007 kom deras ättlingar tillbaka med ett ekologiskt projekt på Finca El Respiro. Stolt och symbolisk revival.</div>
+          <div class="sh-tags"><span class="sh-tag">🌱 Ekologiskt</span><span class="sh-tag">🏛️ Dynastiernas återkomst</span></div>
+        </div>
+      </div>
+
+      <div class="sh-card">
+        <div class="sh-icon" style="background:linear-gradient(135deg,#5a1a1a,#902020);">🏺</div>
+        <div class="sh-info">
+          <div class="sh-name">Bodegas Málaga Virgen &amp; Quitapenas</div>
+          <div class="sh-addr">Fuente de Piedra &amp; Málaga stad</div>
+          <div class="sh-desc">De klassiska ikonerna. Málaga Virgen (grundat 1885) är den mest spridda producenten i regionen — deras söta viner hittas i matbutiker i hela Spanien. Quitapenas (grundat 1880) är den enda producenten inom Málagas stadsgränser och gör utmärkta söta Moscatel och PX.</div>
+          <div class="sh-tags"><span class="sh-tag">🏪 Lättast att hitta lokalt</span><span class="sh-tag">🍯 Söta klassiker</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RÖDA VINER -->
+    <div id="wine-reds" class="sh-group-label" style="margin-top:28px;">🔴 5 röda viner att söka upp</div>
+    <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:14px;">Ronda-området är hjärtat för röda viner — höjdläget ger elegans och syra som annars är ovanlig i södra Spanien.</p>
+    <div class="wine-grid">
+
+      <div class="wine-card">
+        <div class="wine-card-icon">🔴</div>
+        <div class="wine-card-body">
+          <div class="wine-card-name">Los Cipreses Tinto</div>
+          <div class="wine-card-producer">Huerto de la Condesa · Ronda</div>
+          <div class="wine-card-desc">50% Garnacha + 50% Syrah från bergsvin­gårdar i Ronda-dalen. Elegant och fruktig med en tydlig Rhône-känsla — jordig, mjuk och komplex. Fick utmärkelsen "Embajador de Andalucía". Perfekt till grillat kött eller manchego.</div>
+          <div class="wine-card-footer">
+            <span class="wine-badge wine-badge-red">🔴 Rött</span>
+            <span class="wine-badge wine-badge-grape">Garnacha + Syrah</span>
+            <span class="wine-badge wine-badge-star">⭐ Regionens bästa</span>
+            <span class="wine-badge wine-badge-find">📍 Pura Cepa · Birdie Vinos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wine-card">
+        <div class="wine-card-icon">🔴</div>
+        <div class="wine-card-body">
+          <div class="wine-card-name">Payoya Negra</div>
+          <div class="wine-card-producer">La Melonera · Serranía de Ronda</div>
+          <div class="wine-card-desc">Tintilla de Rota, Romé och Syrah — en sällsynt kombination av urgamla lokala druvor och internationella sorter. 12 månader på franskt fat. Djup frukt, balsamiska toner, 92 poäng av Falstaff. Ett av de mest unika vinerna ni kan dricka i regionen.</div>
+          <div class="wine-card-footer">
+            <span class="wine-badge wine-badge-red">🔴 Rött</span>
+            <span class="wine-badge wine-badge-grape">Tintilla de Rota · Romé · Syrah</span>
+            <span class="wine-badge wine-badge-star">92 pts Falstaff</span>
+            <span class="wine-badge wine-badge-find">📍 Decántalo · Ronda Gourmet</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wine-card">
+        <div class="wine-card-icon">🔴</div>
+        <div class="wine-card-body">
+          <div class="wine-card-name">Ariyanas Tinto</div>
+          <div class="wine-card-producer">Bodegas Bentomiz · Axarquía</div>
+          <div class="wine-card-desc">Merlot 65%, Tempranillo 25%, Romé 10%. Fruktigt, seriöst och välbalanserat — Bentomiz visar att de kan göra rött lika bra som vitt. Lättillgängligt men med djup. Bra dagsdrickare till mat.</div>
+          <div class="wine-card-footer">
+            <span class="wine-badge wine-badge-red">🔴 Rött</span>
+            <span class="wine-badge wine-badge-grape">Merlot · Tempranillo · Romé</span>
+            <span class="wine-badge wine-badge-find">📍 Pura Cepa · Vinoteca la Bodega</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wine-card">
+        <div class="wine-card-icon">🔴</div>
+        <div class="wine-card-body">
+          <div class="wine-card-name">La Encina del Inglés Tinto</div>
+          <div class="wine-card-producer">La Melonera · Serranía de Ronda</div>
+          <div class="wine-card-desc">Gjort på inhemska sorter från Ronda-bergen. Skogsfrukt och balsamiska toner, djup och vildvuxen karaktär. Mer rustik och terroir-driven än Payoya Negra — för den som vill ha något genuint unikt som knappt finns utanför regionen.</div>
+          <div class="wine-card-footer">
+            <span class="wine-badge wine-badge-red">🔴 Rött</span>
+            <span class="wine-badge wine-badge-grape">Lokala inhemska sorter</span>
+            <span class="wine-badge wine-badge-find">📍 Decántalo · Enterwine</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wine-card">
+        <div class="wine-card-icon">🔴</div>
+        <div class="wine-card-body">
+          <div class="wine-card-name">Bocatinta Crianza</div>
+          <div class="wine-card-producer">Bodega Gross Hermanos · Antequera</div>
+          <div class="wine-card-desc">Ekologiskt odlad på Finca El Respiro vid Sierra del Torcal. Lagrad crianza-stil — mer struktur och fatkaraktär än de andra vinerna på listan. Bra till kraftig mat som lamm eller oxsvans. Bär med sig en unik symbolisk historia.</div>
+          <div class="wine-card-footer">
+            <span class="wine-badge wine-badge-red">🔴 Rött</span>
+            <span class="wine-badge wine-badge-grape">Cabernet · Syrah · Tempranillo</span>
+            <span class="wine-badge wine-badge-grape">🌱 Ekologiskt</span>
+            <span class="wine-badge wine-badge-find">📍 Direkt hos producenten</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- VITA VINER -->
+    <div id="wine-whites" class="sh-group-label" style="margin-top:28px;">⚪ 5 vita viner att söka upp</div>
+    <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:14px;">Málagas vita viner är regionens verkliga hemlig­het — torra Moscatel-viner av världsklass som knappt någon utanför Spanien känner till.</p>
+    <div class="wine-grid">
+
+      <div class="wine-card">
+        <div class="wine-card-icon">⚪</div>
+        <div class="wine-card-body">
+          <div class="wine-card-name">Ariyanas Seco Sobre Lías Finas</div>
+          <div class="wine-card-producer">Bodegas Bentomiz · Axarquía</div>
+          <div class="wine-card-desc">Regionens absolut mest hyllade vita vin. 100% Moscatel de Alejandría från 80–100 år gamla stockar på skiffer. Fermenterat och lagrat på druvjäst (lías) för extra komplexitet. Torrt, mineraliskt, aromatiskt och fantastiskt friskt — ingenting som ni förväntar er av "Moscatel". Måste prova.</div>
+          <div class="wine-card-footer">
+            <span class="wine-badge wine-badge-white">⚪ Vitt</span>
+            <span class="wine-badge wine-badge-grape">Moscatel de Alejandría</span>
+            <span class="wine-badge wine-badge-star">⭐ Absolut måste</span>
+            <span class="wine-badge wine-badge-find">📍 Pura Cepa · Birdie Vinos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wine-card">
+        <div class="wine-card-icon">⚪</div>
+        <div class="wine-card-body">
+          <div class="wine-card-name">Botani Old Vines Moscatel</div>
+          <div class="wine-card-producer">Jorge Ordóñez &amp; Co · Axarquía</div>
+          <div class="wine-card-desc">Vinet som förändrade regionens rykte. 100% Moscatel från brantaste sluttningarna i Almáchar och El Borge. Spaniens pionjär­vin för torra Moscatel-viner (2004). Friskt, blommigt, mineraliskt — och det mest inter­nationellt tillgängliga av Málagas topphviner.</div>
+          <div class="wine-card-footer">
+            <span class="wine-badge wine-badge-white">⚪ Vitt</span>
+            <span class="wine-badge wine-badge-grape">Moscatel de Alejandría</span>
+            <span class="wine-badge wine-badge-star">🌍 Mest internationellt distribuerat</span>
+            <span class="wine-badge wine-badge-find">📍 Birdie Vinos · El Corte Inglés</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wine-card">
+        <div class="wine-card-icon">⚪</div>
+        <div class="wine-card-body">
+          <div class="wine-card-name">Voladeros</div>
+          <div class="wine-card-producer">Victoria Ordóñez · Málaga</div>
+          <div class="wine-card-desc">100% Pedro Ximénez — men torrt, lagrat på använd ek. En hyllning till det historiska "Mountain Wine" som gjort Málaga berömt i 200 år. Komplext, strukturerat och nötigt. Bra till grillad fisk eller manchego. Sällsynt stil som ni inte hittar någon annanstans.</div>
+          <div class="wine-card-footer">
+            <span class="wine-badge wine-badge-white">⚪ Vitt</span>
+            <span class="wine-badge wine-badge-grape">Pedro Ximénez (torr)</span>
+            <span class="wine-badge wine-badge-star">🏛️ Hyllning till historien</span>
+            <span class="wine-badge wine-badge-find">📍 Pura Cepa · specialbeställ</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wine-card">
+        <div class="wine-card-icon">⚪</div>
+        <div class="wine-card-body">
+          <div class="wine-card-name">La Encina del Inglés Blanco</div>
+          <div class="wine-card-producer">La Melonera · Serranía de Ronda</div>
+          <div class="wine-card-desc">Gjort på Doradilla — en nästan glömd lokal druva som La Melonera arbetar med att rädda. Friskt, lite urtypiskt och mineraliskt med Ronda-berg­ens kylighet. För den som verkligen vill dricka något unikt som knappt finns i omlopp.</div>
+          <div class="wine-card-footer">
+            <span class="wine-badge wine-badge-white">⚪ Vitt</span>
+            <span class="wine-badge wine-badge-grape">Doradilla (lokal urdruva)</span>
+            <span class="wine-badge wine-badge-star">🌱 Extremt ovanlig</span>
+            <span class="wine-badge wine-badge-find">📍 Decántalo online</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wine-card">
+        <div class="wine-card-icon">⚪</div>
+        <div class="wine-card-body">
+          <div class="wine-card-name">Nº2 Victoria</div>
+          <div class="wine-card-producer">Jorge Ordóñez &amp; Co · Axarquía</div>
+          <div class="wine-card-desc">Halvt sött — inte torrt men heller inte tungt sött. Moscatel de Alejandría med ca 130 g/l restsötma men frisk syra som balanserar perfekt. Det första spanska vinet som serverades vid Nobel­pris­middagen (Stockholm, 2012). Bra som aperitif eller till blå­mögelost.</div>
+          <div class="wine-card-footer">
+            <span class="wine-badge wine-badge-white">⚪ Halvt sött</span>
+            <span class="wine-badge wine-badge-grape">Moscatel de Alejandría</span>
+            <span class="wine-badge wine-badge-star">🎖️ Nobel­pris­middagen 2012</span>
+            <span class="wine-badge wine-badge-find">📍 Birdie Vinos · El Corte Inglés</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SÖTA VINER -->
+    <div id="wine-sweet" class="sh-group-label" style="margin-top:28px;">🍯 Söta klassiker — Málagas arv</div>
+    <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:14px;">Även om ni föredrar torra viner: prova minst ett sött Málaga-vin. Det är något helt annat än vanliga dessertviner — och en autentisk historia på tungan.</p>
+    <div class="sh-buys-grid">
+      <div class="sh-buy"><span class="sh-buy-icon">🍯</span><div><strong>Moscatel de Málaga</strong> — Quitapenas / Málaga Virgen<br><span>Solrostat i smaken, intensivt blommig arom, naturlig sötma utan att bli kladdigt. Drick iskall som aperitif eller till manchego och torkade frukter. Hittas i alla matbutiker i regionen.</span></div></div>
+      <div class="sh-buy"><span class="sh-buy-icon">🖤</span><div><strong>Pedro Ximénez (PX)</strong> — Quitapenas<br><span>Nästan svart, tjockt som sirap, smakar russin, fikon och kaffe. Klassikern att hälla över vaniljglass — en kombination som är svår att slå. Drick lite åt gången — det är intensivt. 100% PX, åldrat på amerikansk ek.</span></div></div>
+      <div class="sh-buy"><span class="sh-buy-icon">✨</span><div><strong>Ariyanas Naturalmente Dulce</strong> — Bentomiz<br><span>Sött men med Bentomiz eleganta touch. 100% Moscatel, naturligt sött utan tillsatt sprit. Friskare och mer aromatiskt än de klassiska söta vinerna. Bra med färsk frukt eller mild getost. Deras version av det traditionella — men med modern precision.</span></div></div>
+      <div class="sh-buy"><span class="sh-buy-icon">🥂</span><div><strong>Málaga Lágrima</strong> — traditionell stil<br><span>"Tårvinet" — gjort enbart av druvmust som rinner fritt utan pressning (lágrima = tår). Resultatet är ett av regionens mest delikata och eleganta söta viner. Serveras kylt till dessert eller foie gras. En del av Málagas historiska vinidentitet.</span></div></div>
+    </div>
+
+    <!-- VAR HITTA VINERNA -->
+    <div id="wine-find" class="sh-group-label" style="margin-top:28px;">📍 Var hittar ni vinerna — i La Cala och omgivningar</div>
+    <div class="sh-grid">
+
+      <div class="sh-card sh-card-highlight">
+        <div class="sh-icon" style="background:linear-gradient(135deg,#6a1a3a,#a03060);">🍷</div>
+        <div class="sh-info">
+          <div class="sh-name">Pura Cepa Wine &amp; Gin</div>
+          <div class="sh-addr">Bulevar de La Cala 49 — La Cala de Mijas</div>
+          <div class="sh-desc">Ert bästa kort i La Cala. Vinbar och vinhandel i ett — köp med hem eller drick på plats med tapas. Kurerat urval av spanska viner med fokus på lokala Málaga-producenter. Kunnig personal som guidar er rätt. Fråga specifikt efter Bentomiz, Ordóñez och Ronda-producenter.</div>
+          <div class="sh-tags"><span class="sh-tag">🍷 Vinbar &amp; butik</span><span class="sh-tag">📍 I La Cala</span><span class="sh-tag">🚶 Nära</span></div>
+        </div>
+      </div>
+
+      <div class="sh-card">
+        <div class="sh-icon" style="background:linear-gradient(135deg,#7a3a9a,#9a5ab8);">🍾</div>
+        <div class="sh-info">
+          <div class="sh-name">Birdie Vinos</div>
+          <div class="sh-addr">Las Lagunas de Mijas — 10 min med bil</div>
+          <div class="sh-desc">350 kvm med 500+ viner — bästa vinhandeln i hela Mijas-området. Störst chans att hitta La Melonera, Huerto de la Condesa och andra boutique-producenter. Om ni inte hittar ett vin någon annanstans — kom hit. Kunnig personal, bra priser.</div>
+          <div class="sh-tags"><span class="sh-tag">🍾 500+ viner</span><span class="sh-tag">🚗 10 min</span></div>
+        </div>
+      </div>
+
+      <div class="sh-card">
+        <div class="sh-icon" style="background:linear-gradient(135deg,#7a3a9a,#9a5ab8);">🍷</div>
+        <div class="sh-info">
+          <div class="sh-name">Vinoteca la Bodega</div>
+          <div class="sh-addr">Blvd. de la Cala, Edif. Elena Local 2</div>
+          <div class="sh-desc">Mysig vinbar och vinhandel mitt i La Cala. Bra urval av andalusiska viner och Moscatel. Personalen ger goda rekommendationer. Köp med hem till middagen eller drick ett glas på plats i avslappnad atmosfär.</div>
+          <div class="sh-tags"><span class="sh-tag">🍷 Vinbar</span><span class="sh-tag">📍 I La Cala</span><span class="sh-tag">🚶 Nära</span></div>
+        </div>
+      </div>
+
+      <div class="sh-card">
+        <div class="sh-icon" style="background:linear-gradient(135deg,#1a5a3a,#2a9060);">🛒</div>
+        <div class="sh-info">
+          <div class="sh-name">Mercadona &amp; El Corte Inglés</div>
+          <div class="sh-addr">La Cala / Fuengirola</div>
+          <div class="sh-desc">Mercadona har alltid Málaga Virgen och Quitapenas i hyllan — perfekta för en flaska sött Moscatel att ta med hem. El Corte Inglés i Fuengirola/Marbella har ett bredare urval med Jorge Ordóñez, Botani och några Ronda-producenter.</div>
+          <div class="sh-tags"><span class="sh-tag">🏪 Lättillgängligt</span><span class="sh-tag">💶 Bra priser</span></div>
+        </div>
+      </div>
+
+      <div class="sh-card">
+        <div class="sh-icon" style="background:linear-gradient(135deg,#c0604a,#e8866f);">✨</div>
+        <div class="sh-info">
+          <div class="sh-name">Figaro Restaurant</div>
+          <div class="sh-addr">La Cala de Mijas — 705m · 9 min</div>
+          <div class="sh-desc">Bästa chanstips för lokalt vin på restaurang. Modern medelhavs­fusion med ambition — be aktivt om "algo local de Sierras de Málaga" och de tar troligen fram något bättre än standardlistan. Deras personal är vinkunnig.</div>
+          <div class="sh-tags"><span class="sh-tag">🍴 Restaurang</span><span class="sh-tag">💡 Fråga aktivt</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BESTÄLLNINGSGUIDE -->
+    <div class="sh-group-label" style="margin-top:28px;">🗣️ Beställningsguide — säg detta på restaurang</div>
+    <div class="wine-order-box">
+      <h4>Säg detta — inte "ett bra rött vin tack"</h4>
+      <div class="wine-order-line">🍷 <strong>"¿Tienen algo de Sierras de Málaga?"</strong> <em>— Har ni något från Sierras de Málaga?</em></div>
+      <div class="wine-order-line">🍷 <strong>"Preferimos productores locales pequeños."</strong> <em>— Vi föredrar lokala småproducenter.</em></div>
+      <div class="wine-order-line">🍷 <strong>"¿Tienen Bentomiz o algo de Ronda?"</strong> <em>— Har ni Bentomiz eller något från Ronda?</em></div>
+      <div class="wine-order-line">⚠️ Säger du bara <em>"un buen vino tinto"</em> får du en Rioja Crianza. Det är inte dåligt — men det är inte lokalt.</div>
+    </div>
+
+    <div class="tips-grid" style="margin-top:16px;">
+      <div class="tip-card">
+        <div class="tip-icon">🥂</div>
+        <div class="tip-content">
+          <h4>Den perfekta kvällen</h4>
+          <p><strong>Start:</strong> Pura Cepa Wine &amp; Gin — 2–3 glas lokala viner med guidning av personalen.<br><strong>Middag:</strong> Figaro eller El Cortijillo — be dem matcha med lokalt vin.<br><strong>Avslut:</strong> Ett glas PX eller Moscatel till desserten. Regionens historia på tungan.</p>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🍇</div>
+        <div class="tip-content">
+          <h4>Mata-matching</h4>
+          <p><strong>Vitt till fisk:</strong> Ariyanas Seco eller Botani Moscatel.<br><strong>Rött till kött:</strong> Los Cipreses eller Payoya Negra.<br><strong>Sött till dessert:</strong> PX över glass, Moscatel till ost.<br><strong>Aperitif:</strong> Torr Moscatel iskall, eller ett halvt glas Nº2 Victoria.</p>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">💡</div>
+        <div class="tip-content">
+          <h4>Verklighets­koll</h4>
+          <p>80–90% av restaurangerna i La Cala serverar inte lokalt vin aktivt på standardlistan. Men de flesta <em>har</em> det i bakgrunden om ni frågar. Nyckeln är att fråga rätt — se fraserna i rutan ovan. Det gör skillnad varje gång.</p>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- ══ SHOPPING ══ -->
