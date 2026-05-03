@@ -337,6 +337,22 @@
     .weather-detail-icon { font-size: 1rem; display: block; }
     .weather-detail-val { font-size: 0.82rem; font-weight: 600; color: var(--text); margin-top: 2px; }
     .weather-detail-lbl { font-size: 0.68rem; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.5px; }
+    .weather-forecast {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border);
+    }
+    .weather-forecast-day {
+      padding: 12px 8px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .weather-forecast-day:last-child { border-right: none; }
+    .weather-forecast-name { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-3); font-weight: 600; }
+    .weather-forecast-icon { font-size: 1.6rem; margin: 4px 0; display: block; }
+    .weather-forecast-temps { font-size: 0.82rem; font-weight: 600; color: var(--text); }
+    .weather-forecast-temps span { color: var(--text-3); font-weight: 400; }
+    .weather-forecast-rain { font-size: 0.72rem; color: var(--text-3); margin-top: 2px; }
     .weather-loading {
       padding: 28px;
       text-align: center;
@@ -2637,7 +2653,7 @@
         '?latitude=36.5&longitude=-4.65' +
         '&current=temperature_2m,apparent_temperature,weathercode,windspeed_10m,relativehumidity_2m' +
         '&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max,uv_index_max' +
-        '&timezone=Europe%2FMadrid&forecast_days=1';
+        '&timezone=Europe%2FMadrid&forecast_days=4';
       const res = await fetch(url);
       const d = await res.json();
       const c = d.current;
@@ -2647,6 +2663,22 @@
       const uvLabel = uvVal >= 8 ? '🔴 Högt' : uvVal >= 6 ? '🟠 Medel' : '🟡 Lågt';
       const now = new Date();
       const timeStr = now.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' });
+
+      const dayNames = ['Sön','Mån','Tis','Ons','Tor','Fre','Lör'];
+      let forecastHTML = '';
+      for (let i = 1; i <= 3; i++) {
+        const date = new Date(day.time[i]);
+        const name = dayNames[date.getDay()];
+        const [fIcon] = WMO[day.weathercode[i]] ?? ['🌡️'];
+        const rain = day.precipitation_probability_max[i];
+        forecastHTML += `
+          <div class="weather-forecast-day">
+            <div class="weather-forecast-name">${name}</div>
+            <span class="weather-forecast-icon">${fIcon}</span>
+            <div class="weather-forecast-temps">↑${Math.round(day.temperature_2m_max[i])}° <span>↓${Math.round(day.temperature_2m_min[i])}°</span></div>
+            <div class="weather-forecast-rain">☔ ${rain}%</div>
+          </div>`;
+      }
 
       el.innerHTML = `
         <div class="weather-main">
@@ -2685,7 +2717,8 @@
             <div class="weather-detail-val">${uvLabel}</div>
             <div class="weather-detail-lbl">UV-index</div>
           </div>
-        </div>`;
+        </div>
+        <div class="weather-forecast">${forecastHTML}</div>`;
     } catch(e) {
       el.innerHTML = '<div class="weather-error">⚠️ Kunde inte hämta väder — kontrollera uppkopplingen.</div>';
     }
