@@ -2,9 +2,15 @@
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Sällskapsresan reser till La Cala de Mijas</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="favicon.svg">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="La Cala">
   <style>
     :root {
       --sand: #f5efe6;
@@ -33,7 +39,7 @@
     /* ── HEADER ── */
     .hero {
       background: linear-gradient(160deg, #1a3a5c 0%, #2a7ca6 55%, #c0604a 100%);
-      padding: 48px 24px 36px;
+      padding: max(48px, calc(env(safe-area-inset-top) + 24px)) 24px 36px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -86,39 +92,38 @@
       z-index: 100;
       background: var(--nav-bg);
       display: flex;
-      overflow-x: auto;
+      overflow-x: hidden;
       scrollbar-width: none;
       box-shadow: 0 2px 12px rgba(0,0,0,0.3);
     }
     .nav::-webkit-scrollbar { display: none; }
     .nav-btn {
-      flex: 0 0 auto;
-      padding: 14px 20px;
+      flex: 1;
+      padding: 12px 4px;
       background: none;
       border: none;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.55);
       font-size: 0.85rem;
       cursor: pointer;
       transition: all 0.2s;
-      white-space: nowrap;
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-weight: 500;
+      justify-content: center;
       border-bottom: 3px solid transparent;
+      min-width: 0;
     }
     .nav-btn:hover { color: #fff; }
     .nav-btn.active {
       color: #fff;
       border-bottom-color: var(--terra-light);
     }
-    .nav-icon { font-size: 1.1rem; }
+    .nav-icon { font-size: 1.5rem; }
 
     /* ── MAIN CONTENT ── */
     .container {
       max-width: 900px;
       margin: 0 auto;
-      padding: 28px 16px 60px;
+      padding: 28px 16px max(60px, calc(env(safe-area-inset-bottom) + 40px));
     }
 
     .section { display: none; }
@@ -675,29 +680,29 @@
 
 <!-- NAVIGATION -->
 <nav class="nav">
-  <button class="nav-btn active" onclick="showSection('overview', this)">
-    <span class="nav-icon">🗺️</span> Översikt
+  <button class="nav-btn active" onclick="showSection('overview', this)" title="Översikt">
+    <span class="nav-icon">🗺️</span>
   </button>
-  <button class="nav-btn" onclick="showSection('restaurants', this)">
-    <span class="nav-icon">🍽️</span> Restauranger
+  <button class="nav-btn" onclick="showSection('restaurants', this)" title="Restauranger">
+    <span class="nav-icon">🍽️</span>
   </button>
-  <button class="nav-btn" onclick="showSection('cafes', this)">
-    <span class="nav-icon">☕</span> Caféer
+  <button class="nav-btn" onclick="showSection('cafes', this)" title="Caféer">
+    <span class="nav-icon">☕</span>
   </button>
-  <button class="nav-btn" onclick="showSection('trips', this)">
-    <span class="nav-icon">🚗</span> Utflykter
+  <button class="nav-btn" onclick="showSection('trips', this)" title="Utflykter">
+    <span class="nav-icon">🚗</span>
   </button>
-  <button class="nav-btn" onclick="showSection('tips', this)">
-    <span class="nav-icon">💡</span> Praktiskt
+  <button class="nav-btn" onclick="showSection('shopping', this)" title="Mat & Handel">
+    <span class="nav-icon">🛒</span>
   </button>
-  <button class="nav-btn" onclick="showSection('bookings', this)">
-    <span class="nav-icon">🎫</span> Bokningar
+  <button class="nav-btn" onclick="showSection('shoppingfashion', this)" title="Shopping">
+    <span class="nav-icon">🛍️</span>
   </button>
-  <button class="nav-btn" onclick="showSection('shopping', this)">
-    <span class="nav-icon">🛒</span> Mat & Handel
+  <button class="nav-btn" onclick="showSection('tips', this)" title="Praktiskt">
+    <span class="nav-icon">💡</span>
   </button>
-  <button class="nav-btn" onclick="showSection('shoppingfashion', this)">
-    <span class="nav-icon">🛍️</span> Shopping
+  <button class="nav-btn" onclick="showSection('bookings', this)" title="Bokningar">
+    <span class="nav-icon">🎫</span>
   </button>
 </nav>
 
