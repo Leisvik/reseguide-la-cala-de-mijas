@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Sällskapsresan reser till La Cala de Mijas</title>
+  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/pricedown">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="apple-touch-icon" href="favicon.svg">
   <link rel="manifest" href="manifest.json">
@@ -49,39 +50,74 @@
 
     /* ── HERO ── */
     .hero {
-      background: linear-gradient(170deg, #1C1C1E 0%, #2C3E50 60%, #3A7CA5 100%);
-      padding: max(52px, calc(env(safe-area-inset-top) + 28px)) 24px 32px;
+      position: relative;
+      background-image: url('./hero.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      padding: max(52px, calc(env(safe-area-inset-top) + 28px)) 24px 40px;
       text-align: center;
+      overflow: hidden;
     }
-    .hero-flag { font-size: 36px; margin-bottom: 12px; display: block; }
-    .hero h1 {
-      font-size: clamp(1.5rem, 5vw, 2.4rem);
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.55) 0%,
+        rgba(0,0,0,0.15) 40%,
+        rgba(0,0,0,0.55) 100%
+      );
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .hero-flag { font-size: 36px; margin-bottom: 8px; display: block; }
+    .hero-gta-title {
+      font-family: 'Pricedown', 'Impact', 'Arial Black', sans-serif;
+      font-size: clamp(2.8rem, 13vw, 6rem);
+      line-height: 0.9;
+      letter-spacing: 2px;
+      text-transform: uppercase;
       color: #fff;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      line-height: 1.2;
+      background: linear-gradient(180deg, #ffffff 0%, #f0d060 55%, #e8a820 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 2px 0 rgba(0,0,0,0.9)) drop-shadow(0 0 20px rgba(232,168,32,0.4));
+      margin-bottom: 4px;
+    }
+    .hero-gta-sub {
+      font-family: 'Pricedown', 'Impact', 'Arial Black', sans-serif;
+      font-size: clamp(0.95rem, 3.5vw, 1.4rem);
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      text-shadow: 0 1px 6px rgba(0,0,0,0.8);
+      margin-bottom: 0;
     }
     .hero-sub {
-      color: rgba(255,255,255,0.5);
-      margin-top: 6px;
-      font-size: 0.78rem;
+      color: rgba(255,255,255,0.55);
+      margin-top: 14px;
+      font-size: 0.75rem;
       letter-spacing: 2px;
       text-transform: uppercase;
       font-weight: 500;
     }
     .hero-dates {
       display: inline-block;
-      background: rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: rgba(255,255,255,0.92);
       padding: 5px 16px;
       border-radius: 100px;
       font-size: 0.82rem;
       font-weight: 500;
       margin-top: 14px;
+      border: 1px solid rgba(255,255,255,0.2);
     }
     .hero-crew {
       display: block;
-      color: rgba(255,255,255,0.4);
+      color: rgba(255,255,255,0.45);
       font-size: 0.78rem;
       margin-top: 8px;
       letter-spacing: 0.5px;
@@ -450,9 +486,9 @@
 
 <!-- HERO -->
 <header class="hero">
-  <div class="hero-flag">🇪🇸</div>
-  <h1>Sällskapsresan reser till<br>La Cala de Mijas</h1>
-  <p class="hero-sub">Costa del Sol · Andalusien</p>
+  <div class="hero-gta-title">La Cala<br>de Mijas</div>
+  <div class="hero-gta-sub">Costa del Sol</div>
+  <p class="hero-sub">Andalusien · Spanien</p>
   <div class="hero-dates">📅 9–16 maj 2025</div>
   <div class="hero-crew">🧑‍🤝‍🧑 Lisa · Jonas · Charlotte · Niclas</div>
 </header>
