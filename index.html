@@ -279,22 +279,71 @@
     .trip-tip-box strong { display: block; margin-bottom: 2px; color: #7a5500; }
 
     /* ── INFO GRID (overview) ── */
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-    .info-box {
+    /* ── VÄDER-WIDGET ── */
+    .weather-widget {
       background: var(--surface);
       border-radius: var(--r);
-      padding: 16px 14px;
-      text-align: center;
       box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+      overflow: hidden;
     }
-    .info-box-icon { font-size: 1.6rem; margin-bottom: 6px; }
-    .info-box-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-3); font-weight: 600; }
-    .info-box-value { font-size: 0.9rem; font-weight: 700; margin-top: 3px; color: var(--text); }
+    .weather-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 22px 16px;
+      gap: 12px;
+    }
+    .weather-left { display: flex; align-items: center; gap: 14px; }
+    .weather-icon { font-size: 3.2rem; line-height: 1; }
+    .weather-temp {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+    .weather-temp sup { font-size: 1.2rem; letter-spacing: 0; vertical-align: super; }
+    .weather-desc {
+      font-size: 0.88rem;
+      color: var(--text-2);
+      margin-top: 3px;
+    }
+    .weather-right { text-align: right; }
+    .weather-minmax {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .weather-minmax span { color: var(--text-3); font-weight: 400; }
+    .weather-location {
+      font-size: 0.72rem;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+    .weather-details {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--border);
+    }
+    .weather-detail {
+      padding: 11px 10px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .weather-detail:last-child { border-right: none; }
+    .weather-detail-icon { font-size: 1rem; display: block; }
+    .weather-detail-val { font-size: 0.82rem; font-weight: 600; color: var(--text); margin-top: 2px; }
+    .weather-detail-lbl { font-size: 0.68rem; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.5px; }
+    .weather-loading {
+      padding: 28px;
+      text-align: center;
+      color: var(--text-3);
+      font-size: 0.9rem;
+    }
+    .weather-error { padding: 20px; text-align: center; color: var(--text-3); font-size: 0.85rem; }
 
     .overview-intro {
       background: var(--surface);
@@ -532,27 +581,8 @@
       <p>Era åtta dagar i paradiset — en sammanfattning</p>
     </div>
 
-    <div class="info-grid">
-      <div class="info-box">
-        <div class="info-box-icon">📍</div>
-        <div class="info-box-label">Destination</div>
-        <div class="info-box-value">La Cala de Mijas</div>
-      </div>
-      <div class="info-box">
-        <div class="info-box-icon">☀️</div>
-        <div class="info-box-label">Temperatur</div>
-        <div class="info-box-value">22–26°C</div>
-      </div>
-      <div class="info-box">
-        <div class="info-box-icon">🚗</div>
-        <div class="info-box-label">Transport</div>
-        <div class="info-box-value">Hyrbil ingår</div>
-      </div>
-      <div class="info-box">
-        <div class="info-box-icon">👥</div>
-        <div class="info-box-label">Sällskapet</div>
-        <div class="info-box-value">Lisa · Jonas · Charlotte · Niclas</div>
-      </div>
+    <div class="weather-widget" id="weather-widget">
+      <div class="weather-loading">🌤️ Hämtar väder för La Cala de Mijas…</div>
     </div>
 
     <div class="overview-intro">
@@ -2588,6 +2618,81 @@
 </div>
 
 <script>
+  /* ── VÄDER ── */
+  const WMO = {
+    0:  ['☀️','Klart'],
+    1:  ['🌤️','Mestadels klart'], 2: ['⛅','Halvklart'], 3: ['☁️','Mulet'],
+    45: ['🌫️','Dimma'], 48: ['🌫️','Rimfrost'],
+    51: ['🌦️','Lätt duggregn'], 53: ['🌦️','Duggregn'], 55: ['🌧️','Kraftigt duggregn'],
+    61: ['🌧️','Lätt regn'], 63: ['🌧️','Regn'], 65: ['🌧️','Kraftigt regn'],
+    71: ['🌨️','Lätt snö'], 73: ['🌨️','Snö'], 75: ['❄️','Kraftig snö'],
+    80: ['🌦️','Regnskurar'], 81: ['🌧️','Regnskurar'], 82: ['⛈️','Kraftiga skurar'],
+    95: ['⛈️','Åska'], 96: ['⛈️','Åska med hagel'], 99: ['⛈️','Åska med hagel']
+  };
+
+  async function loadWeather() {
+    const el = document.getElementById('weather-widget');
+    try {
+      const url = 'https://api.open-meteo.com/v1/forecast' +
+        '?latitude=36.5&longitude=-4.65' +
+        '&current=temperature_2m,apparent_temperature,weathercode,windspeed_10m,relativehumidity_2m' +
+        '&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max,uv_index_max' +
+        '&timezone=Europe%2FMadrid&forecast_days=1';
+      const res = await fetch(url);
+      const d = await res.json();
+      const c = d.current;
+      const day = d.daily;
+      const [icon, desc] = WMO[c.weathercode] ?? ['🌡️', 'Okänt'];
+      const uvVal = day.uv_index_max[0];
+      const uvLabel = uvVal >= 8 ? '🔴 Högt' : uvVal >= 6 ? '🟠 Medel' : '🟡 Lågt';
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' });
+
+      el.innerHTML = `
+        <div class="weather-main">
+          <div class="weather-left">
+            <div class="weather-icon">${icon}</div>
+            <div>
+              <div class="weather-temp">${Math.round(c.temperature_2m)}<sup>°C</sup></div>
+              <div class="weather-desc">${desc} · Känns som ${Math.round(c.apparent_temperature)}°</div>
+            </div>
+          </div>
+          <div class="weather-right">
+            <div class="weather-minmax">
+              ↑ ${Math.round(day.temperature_2m_max[0])}° <span>/</span> ↓ ${Math.round(day.temperature_2m_min[0])}°
+            </div>
+            <div class="weather-location">La Cala de Mijas · ${timeStr}</div>
+          </div>
+        </div>
+        <div class="weather-details">
+          <div class="weather-detail">
+            <span class="weather-detail-icon">💨</span>
+            <div class="weather-detail-val">${Math.round(c.windspeed_10m)} km/h</div>
+            <div class="weather-detail-lbl">Vind</div>
+          </div>
+          <div class="weather-detail">
+            <span class="weather-detail-icon">💧</span>
+            <div class="weather-detail-val">${c.relativehumidity_2m}%</div>
+            <div class="weather-detail-lbl">Luftfukt.</div>
+          </div>
+          <div class="weather-detail">
+            <span class="weather-detail-icon">☔</span>
+            <div class="weather-detail-val">${day.precipitation_probability_max[0]}%</div>
+            <div class="weather-detail-lbl">Regn</div>
+          </div>
+          <div class="weather-detail">
+            <span class="weather-detail-icon">🕶️</span>
+            <div class="weather-detail-val">${uvLabel}</div>
+            <div class="weather-detail-lbl">UV-index</div>
+          </div>
+        </div>`;
+    } catch(e) {
+      el.innerHTML = '<div class="weather-error">⚠️ Kunde inte hämta väder — kontrollera uppkopplingen.</div>';
+    }
+  }
+
+  loadWeather();
+
   function showSection(id, btn) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
