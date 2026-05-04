@@ -3196,6 +3196,78 @@
     95: ['⛈️','Åska'], 96: ['⛈️','Åska med hagel'], 99: ['⛈️','Åska med hagel']
   };
 
+  function renderWeather(d, offlineAge) {
+    const el = document.getElementById('weather-widget');
+    const c = d.current;
+    const day = d.daily;
+    const [icon, desc] = WMO[c.weathercode] ?? ['🌡️', 'Okänt'];
+    const uvVal = day.uv_index_max[0];
+    const uvLabel = uvVal >= 8 ? '🔴 Högt' : uvVal >= 6 ? '🟠 Medel' : '🟡 Lågt';
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' });
+
+    const dayNames = ['Sön','Mån','Tis','Ons','Tor','Fre','Lör'];
+    let forecastHTML = '';
+    for (let i = 1; i <= 3; i++) {
+      const date = new Date(day.time[i]);
+      const name = dayNames[date.getDay()];
+      const [fIcon] = WMO[day.weathercode[i]] ?? ['🌡️'];
+      const rain = day.precipitation_probability_max[i];
+      forecastHTML += `
+        <div class="weather-forecast-day">
+          <div class="weather-forecast-name">${name}</div>
+          <span class="weather-forecast-icon">${fIcon}</span>
+          <div class="weather-forecast-temps">↑${Math.round(day.temperature_2m_max[i])}° <span>↓${Math.round(day.temperature_2m_min[i])}°</span></div>
+          <div class="weather-forecast-rain">☔ ${rain}%</div>
+        </div>`;
+    }
+
+    const offlineBanner = offlineAge != null
+      ? `<div style="text-align:center;font-size:0.72rem;color:var(--text-3);padding:6px;border-top:1px solid var(--border);">📵 Offline — senast hämtat för ${offlineAge} min sedan</div>`
+      : '';
+
+    el.innerHTML = `
+      <div class="weather-main">
+        <div class="weather-left">
+          <div class="weather-icon">${icon}</div>
+          <div>
+            <div class="weather-temp">${Math.round(c.temperature_2m)}<sup>°C</sup></div>
+            <div class="weather-desc">${desc} · Känns som ${Math.round(c.apparent_temperature)}°</div>
+          </div>
+        </div>
+        <div class="weather-right">
+          <div class="weather-minmax">
+            ↑ ${Math.round(day.temperature_2m_max[0])}° <span>/</span> ↓ ${Math.round(day.temperature_2m_min[0])}°
+          </div>
+          <div class="weather-location">La Cala de Mijas · ${timeStr}</div>
+        </div>
+      </div>
+      <div class="weather-details">
+        <div class="weather-detail">
+          <span class="weather-detail-icon">💨</span>
+          <div class="weather-detail-val">${Math.round(c.windspeed_10m)} km/h</div>
+          <div class="weather-detail-lbl">Vind</div>
+        </div>
+        <div class="weather-detail">
+          <span class="weather-detail-icon">💧</span>
+          <div class="weather-detail-val">${c.relativehumidity_2m}%</div>
+          <div class="weather-detail-lbl">Luftfukt.</div>
+        </div>
+        <div class="weather-detail">
+          <span class="weather-detail-icon">☔</span>
+          <div class="weather-detail-val">${day.precipitation_probability_max[0]}%</div>
+          <div class="weather-detail-lbl">Regn</div>
+        </div>
+        <div class="weather-detail">
+          <span class="weather-detail-icon">🕶️</span>
+          <div class="weather-detail-val">${uvLabel}</div>
+          <div class="weather-detail-lbl">UV-index</div>
+        </div>
+      </div>
+      <div class="weather-forecast">${forecastHTML}</div>
+      ${offlineBanner}`;
+  }
+
   async function loadWeather() {
     const el = document.getElementById('weather-widget');
     try {
@@ -3206,75 +3278,28 @@
         '&timezone=Europe%2FMadrid&forecast_days=4';
       const res = await fetch(url);
       const d = await res.json();
-      const c = d.current;
-      const day = d.daily;
-      const [icon, desc] = WMO[c.weathercode] ?? ['🌡️', 'Okänt'];
-      const uvVal = day.uv_index_max[0];
-      const uvLabel = uvVal >= 8 ? '🔴 Högt' : uvVal >= 6 ? '🟠 Medel' : '🟡 Lågt';
-      const now = new Date();
-      const timeStr = now.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' });
-
-      const dayNames = ['Sön','Mån','Tis','Ons','Tor','Fre','Lör'];
-      let forecastHTML = '';
-      for (let i = 1; i <= 3; i++) {
-        const date = new Date(day.time[i]);
-        const name = dayNames[date.getDay()];
-        const [fIcon] = WMO[day.weathercode[i]] ?? ['🌡️'];
-        const rain = day.precipitation_probability_max[i];
-        forecastHTML += `
-          <div class="weather-forecast-day">
-            <div class="weather-forecast-name">${name}</div>
-            <span class="weather-forecast-icon">${fIcon}</span>
-            <div class="weather-forecast-temps">↑${Math.round(day.temperature_2m_max[i])}° <span>↓${Math.round(day.temperature_2m_min[i])}°</span></div>
-            <div class="weather-forecast-rain">☔ ${rain}%</div>
-          </div>`;
-      }
-
-      el.innerHTML = `
-        <div class="weather-main">
-          <div class="weather-left">
-            <div class="weather-icon">${icon}</div>
-            <div>
-              <div class="weather-temp">${Math.round(c.temperature_2m)}<sup>°C</sup></div>
-              <div class="weather-desc">${desc} · Känns som ${Math.round(c.apparent_temperature)}°</div>
-            </div>
-          </div>
-          <div class="weather-right">
-            <div class="weather-minmax">
-              ↑ ${Math.round(day.temperature_2m_max[0])}° <span>/</span> ↓ ${Math.round(day.temperature_2m_min[0])}°
-            </div>
-            <div class="weather-location">La Cala de Mijas · ${timeStr}</div>
-          </div>
-        </div>
-        <div class="weather-details">
-          <div class="weather-detail">
-            <span class="weather-detail-icon">💨</span>
-            <div class="weather-detail-val">${Math.round(c.windspeed_10m)} km/h</div>
-            <div class="weather-detail-lbl">Vind</div>
-          </div>
-          <div class="weather-detail">
-            <span class="weather-detail-icon">💧</span>
-            <div class="weather-detail-val">${c.relativehumidity_2m}%</div>
-            <div class="weather-detail-lbl">Luftfukt.</div>
-          </div>
-          <div class="weather-detail">
-            <span class="weather-detail-icon">☔</span>
-            <div class="weather-detail-val">${day.precipitation_probability_max[0]}%</div>
-            <div class="weather-detail-lbl">Regn</div>
-          </div>
-          <div class="weather-detail">
-            <span class="weather-detail-icon">🕶️</span>
-            <div class="weather-detail-val">${uvLabel}</div>
-            <div class="weather-detail-lbl">UV-index</div>
-          </div>
-        </div>
-        <div class="weather-forecast">${forecastHTML}</div>`;
+      // Spara i localStorage för offline-läge
+      localStorage.setItem('weather', JSON.stringify({ d, ts: Date.now() }));
+      renderWeather(d, null);
     } catch(e) {
-      el.innerHTML = '<div class="weather-error">⚠️ Kunde inte hämta väder — kontrollera uppkopplingen.</div>';
+      // Offline — försök visa cachat väder
+      const saved = localStorage.getItem('weather');
+      if (saved) {
+        const { d, ts } = JSON.parse(saved);
+        const age = Math.round((Date.now() - ts) / 60000);
+        renderWeather(d, age);
+      } else {
+        el.innerHTML = '<div class="weather-error">📵 Offline — inget sparat väder att visa ännu. Öppna appen med internet en gång först.</div>';
+      }
     }
   }
 
   loadWeather();
+
+  // Service Worker — offline-stöd
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js');
+  }
 
   function showSection(id, btn) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
