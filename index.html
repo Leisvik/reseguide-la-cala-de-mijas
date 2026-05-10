@@ -600,6 +600,81 @@
     .card, .trip-card, .info-box, .tip-card, .overview-intro, .sh-card, .sh-buy {
       animation: fadeUp 0.3s ease both;
     }
+
+    /* ── CARD LINKS (hemsida + karta) ── */
+    .card-links {
+      padding: 8px 12px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .card-link-web { background: rgba(58,124,165,0.1); color: var(--ocean); }
+    .card-link-web:hover { background: rgba(58,124,165,0.2); }
+    .card-link-map { background: rgba(192,96,74,0.1); color: var(--accent); }
+    .card-link-map:hover { background: rgba(192,96,74,0.2); }
+
+    /* ── SH-CARD LINKS ── */
+    .sh-links { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 7px; }
+    .sh-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .sh-link-web { background: rgba(58,124,165,0.1); color: var(--ocean); }
+    .sh-link-web:hover { background: rgba(58,124,165,0.2); }
+    .sh-link-map { background: rgba(192,96,74,0.1); color: var(--accent); }
+    .sh-link-map:hover { background: rgba(192,96,74,0.2); }
+
+    /* ── LEISVIK RATING ── */
+    .leisvik-rating {
+      margin: 0 14px 0;
+      background: linear-gradient(135deg, #1D1D1F 0%, #2c1f10 100%);
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .leisvik-rating-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 2px;
+    }
+    .leisvik-rating-score {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #f0d060;
+    }
+    .leisvik-rating-stars { color: #f5a623; }
+    .leisvik-rating-date {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.35);
+      text-align: right;
+    }
+
+    /* ── GLASS SECTION ── */
+    .tag-glass { background: #EAF4FB; color: #0a5a7a; }
   </style>
 </head>
 <body>
@@ -845,6 +920,10 @@
           <div class="card-meta">💶 €€€€</div>
           <div class="card-meta">🚶 745m · 9 min</div>
         </div>
+        <div class="card-links">
+          <a class="card-link card-link-web" href="https://thenewgeranium.com" target="_blank" rel="noopener noreferrer">🌐 Hemsida</a>
+          <a class="card-link card-link-map" href="https://www.google.com/maps/search/The+Little+Geranium+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+        </div>
       </div>
 
       <div class="card" data-category="seafood">
@@ -858,6 +937,10 @@
           <div class="card-meta"><span class="stars">★★★★☆</span> Lokalt favorit</div>
           <div class="card-meta">💶 €€€</div>
           <div class="card-meta">🚶 1.4km · 18 min</div>
+        </div>
+        <div class="card-links">
+          <a class="card-link card-link-web" href="https://restaurantetorreonlacala.com" target="_blank" rel="noopener noreferrer">🌐 Hemsida</a>
+          <a class="card-link card-link-map" href="https://www.google.com/maps/search/Restaurante+El+Torre%C3%B3n+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
         </div>
       </div>
 
@@ -873,6 +956,9 @@
           <div class="card-meta">💶 €€</div>
           <div class="card-meta">🚶 2.2km · 26 min</div>
         </div>
+        <div class="card-links">
+          <a class="card-link card-link-map" href="https://www.google.com/maps/search/La+Familia+Chiringuito+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+        </div>
       </div>
 
       <div class="card" data-category="fine">
@@ -886,6 +972,10 @@
           <div class="card-meta"><span class="stars">★★★★☆</span> TheFork</div>
           <div class="card-meta">💶 €€€€</div>
         </div>
+        <div class="card-links">
+          <a class="card-link card-link-web" href="https://www.oliviaslacala.com" target="_blank" rel="noopener noreferrer">🌐 Hemsida</a>
+          <a class="card-link card-link-map" href="https://www.google.com/maps/search/Olivia%27s+La+Cala+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+        </div>
       </div>
 
       <div class="card" data-category="fusion">
@@ -898,6 +988,10 @@
         <div class="card-footer">
           <div class="card-meta"><span class="stars">★★★★☆</span> Wanderlog</div>
           <div class="card-meta">💶 €€</div>
+        </div>
+        <div class="card-links">
+          <a class="card-link card-link-web" href="https://tikusgastrobar.com" target="_blank" rel="noopener noreferrer">🌐 Hemsida</a>
+          <a class="card-link card-link-map" href="https://www.google.com/maps/search/Tikus+Gastrobar+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
         </div>
       </div>
 
@@ -913,6 +1007,9 @@
           <div class="card-meta">💶 €</div>
           <div class="card-meta">🚶 1.2km · 15 min</div>
         </div>
+        <div class="card-links">
+          <a class="card-link card-link-map" href="https://www.google.com/maps/search/Kiosko+Cristobal+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+        </div>
       </div>
 
       <div class="card" data-category="fusion">
@@ -925,6 +1022,9 @@
         <div class="card-footer">
           <div class="card-meta"><span class="stars">★★★★☆</span> TheFork</div>
           <div class="card-meta">💶 €€€</div>
+        </div>
+        <div class="card-links">
+          <a class="card-link card-link-map" href="https://www.google.com/maps/search/Konfusion+Restaurante+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
         </div>
       </div>
 
@@ -939,6 +1039,9 @@
           <div class="card-meta"><span class="stars">★★★★★</span> TheFork 9.1</div>
           <div class="card-meta">💶 €€€</div>
         </div>
+        <div class="card-links">
+          <a class="card-link card-link-map" href="https://www.google.com/maps/search/Do%C3%B1a+Mar%C3%ADa+Restaurante+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+        </div>
       </div>
 
       <div class="card" data-category="mediterranean">
@@ -948,10 +1051,21 @@
           <div class="card-title">El Cortijillo</div>
           <p class="card-desc">Familjedriven klassiker som är en av de mest konsekvent välrecenserade restaurangerna i La Cala. Brett spanskt meny med allt från paella och bläckfisk till grillat kött med Malagavinssås. Alltid fullt — boka bord i förväg. Glutenfria alternativ finns.</p>
         </div>
-        <div class="card-footer">
+        <div class="leisvik-rating">
+          <div>
+            <div class="leisvik-rating-label">Leisvik Rating</div>
+            <div class="leisvik-rating-score"><span class="leisvik-rating-stars">★★★★</span> 3.9 / 5</div>
+          </div>
+          <div class="leisvik-rating-date">9 maj 2026</div>
+        </div>
+        <div class="card-footer" style="margin-top:10px;">
           <div class="card-meta"><span class="stars">★★★★★</span> Google 4.6 (1300+)</div>
           <div class="card-meta">💶 €€</div>
           <div class="card-meta">🚶 475m · 6 min</div>
+        </div>
+        <div class="card-links">
+          <a class="card-link card-link-web" href="https://elcortijillorestaurante.es" target="_blank" rel="noopener noreferrer">🌐 Hemsida</a>
+          <a class="card-link card-link-map" href="https://www.google.com/maps/search/El+Cortijillo+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
         </div>
       </div>
 
@@ -966,6 +1080,9 @@
           <div class="card-meta"><span class="stars">★★★★★</span> TripAdvisor 4.6</div>
           <div class="card-meta">💶 €€–€€€</div>
         </div>
+        <div class="card-links">
+          <a class="card-link card-link-map" href="https://www.google.com/maps/search/Meson+Los+Naranjos+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+        </div>
       </div>
 
       <div class="card" data-category="mediterranean">
@@ -978,6 +1095,10 @@
         <div class="card-footer">
           <div class="card-meta"><span class="stars">★★★★★</span> TripAdvisor 4.7 (1290+)</div>
           <div class="card-meta">💶 €€–€€€</div>
+        </div>
+        <div class="card-links">
+          <a class="card-link card-link-web" href="https://lapergolalacala.com" target="_blank" rel="noopener noreferrer">🌐 Hemsida</a>
+          <a class="card-link card-link-map" href="https://www.google.com/maps/search/La+Pergola+Ristorante+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
         </div>
       </div>
 
@@ -993,6 +1114,10 @@
           <div class="card-meta">💶 €€€</div>
           <div class="card-meta">🚶 705m · 9 min</div>
         </div>
+        <div class="card-links">
+          <a class="card-link card-link-web" href="https://figarorestaurantlacala.com" target="_blank" rel="noopener noreferrer">🌐 Hemsida</a>
+          <a class="card-link card-link-map" href="https://www.google.com/maps/search/Figaro+Restaurant+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+        </div>
       </div>
 
       <div class="card" data-category="fine">
@@ -1006,6 +1131,10 @@
           <div class="card-meta"><span class="stars">★★★★★</span> Google 4.8 (544+)</div>
           <div class="card-meta">💶 €€€</div>
           <div class="card-meta">🚶 1.5km · 19 min</div>
+        </div>
+        <div class="card-links">
+          <a class="card-link card-link-web" href="https://pauza.es" target="_blank" rel="noopener noreferrer">🌐 Hemsida</a>
+          <a class="card-link card-link-map" href="https://www.google.com/maps/search/PAUZA+Restaurant+Bar+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
         </div>
       </div>
 
@@ -1021,6 +1150,10 @@
           <div class="sh-addr">La Cala de Mijas — 15 min promenad från centrum</div>
           <div class="sh-desc">Dold pärla som specialiserar sig på tapas i varierande storlekar — perfekt för den som vill prova mycket. <strong>Måste beställa:</strong> köttbullar i mandelsås och laxtatare. Lugn och mysig atmosfär.</div>
           <div class="sh-tags"><span class="sh-tag">🍴 Tapas</span><span class="sh-tag">⭐ Lokal favorit</span></div>
+          <div class="sh-links">
+            <a class="sh-link sh-link-web" href="https://www.bocartetapas.es" target="_blank" rel="noopener noreferrer">🌐 Hemsida</a>
+            <a class="sh-link sh-link-map" href="https://www.google.com/maps/search/Bocarte+Tapas+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+          </div>
         </div>
       </div>
       <div class="sh-card">
@@ -1030,6 +1163,9 @@
           <div class="sh-addr">La Cala de Mijas — vid stranden</div>
           <div class="sh-desc">Äkta lokal chiringuito. <strong>Måste beställa:</strong> espetos de sardinas (sardiner på spett över glödande kol), gambas al ajillo och boquerones fritos. Låga priser, hög kvalitet, välkomnande kaos.</div>
           <div class="sh-tags"><span class="sh-tag">🐟 Fisk &amp; skaldjur</span><span class="sh-tag">🏖️ Strand</span><span class="sh-tag">🚶 1.2km · 15 min</span></div>
+          <div class="sh-links">
+            <a class="sh-link sh-link-map" href="https://www.google.com/maps/search/Kiosko+Crist%C3%B3bal+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+          </div>
         </div>
       </div>
       <div class="sh-card">
@@ -1039,6 +1175,10 @@
           <div class="sh-addr">La Cala de Mijas</div>
           <div class="sh-desc">Asiatisk-spansk fusion med kreativa tapas. <strong>Måste beställa:</strong> gyoza med jamón, tataki av tonfisk och croquetas de gambas. Unik och spännande — för den som vill ha något utöver det vanliga.</div>
           <div class="sh-tags"><span class="sh-tag">🌏 Fusion</span><span class="sh-tag">✨ Kreativt</span></div>
+          <div class="sh-links">
+            <a class="sh-link sh-link-web" href="https://tikusgastrobar.com" target="_blank" rel="noopener noreferrer">🌐 Hemsida</a>
+            <a class="sh-link sh-link-map" href="https://www.google.com/maps/search/Tikus+Gastrobar+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+          </div>
         </div>
       </div>
       <div class="sh-card">
@@ -1048,6 +1188,9 @@
           <div class="sh-addr">La Cala de Mijas</div>
           <div class="sh-desc">Modern spansk fusion med starka tapas. <strong>Måste beställa:</strong> charkuteribricka med lokala korvar, jamón-kroketter (croquetas de jamón) och pil-pil-räkor. Bra vinlista.</div>
           <div class="sh-tags"><span class="sh-tag">🍷 Vin &amp; tapas</span><span class="sh-tag">🌶️ Modern spansk</span></div>
+          <div class="sh-links">
+            <a class="sh-link sh-link-map" href="https://www.google.com/maps/search/Konfusion+Restaurante+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1077,6 +1220,9 @@
           <div class="sh-addr">Calle Miguel Márquez 43, Fuengirola — 10 min</div>
           <div class="sh-desc">Fuengirolas bästa och mest hyllade risrestaurang. Prisvinnare i "Cazuela de la Abuela"-tävlingen med kockar från Valencia och Sevilla. Paella valenciana, marinera och arroz negro (bläckfiskbläck) i absolut toppklass. <strong>Boka bord.</strong></div>
           <div class="sh-tags"><span class="sh-tag">🏆 Prisbelönt</span><span class="sh-tag">📞 Boka i förväg</span><span class="sh-tag">🚗 10 min</span></div>
+          <div class="sh-links">
+            <a class="sh-link sh-link-map" href="https://www.google.com/maps/search/Arrozante+La+Casa+del+Arroz+Fuengirola" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+          </div>
         </div>
       </div>
       <div class="sh-card">
@@ -1086,6 +1232,10 @@
           <div class="sh-addr">Fuengirola — 10 min</div>
           <div class="sh-desc">En av Fuengirolas mest populära skaldjursrestauranger. Paella de mariscos (skaldjurspaella) med färska räkor, musslor och kräftor — lagan med råvaror direkt från hamnen. Livlig stämning och generösa portioner.</div>
           <div class="sh-tags"><span class="sh-tag">🦐 Skaldjur</span><span class="sh-tag">🌊 Populär</span><span class="sh-tag">🚗 10 min</span></div>
+          <div class="sh-links">
+            <a class="sh-link sh-link-web" href="https://losmellizos.net" target="_blank" rel="noopener noreferrer">🌐 Hemsida</a>
+            <a class="sh-link sh-link-map" href="https://www.google.com/maps/search/Marisquer%C3%ADa+Los+Mellizos+Fuengirola" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+          </div>
         </div>
       </div>
       <div class="sh-card">
@@ -1095,6 +1245,9 @@
           <div class="sh-addr">Mijas Costa — 5 min</div>
           <div class="sh-desc">Strandchiringuito med ryktet om att servera Costa del Sols bästa paella. Kocken har arbetat här i decennier och missar aldrig. Välj paella med fisk och skaldjur. Bättre att ringa och boka in paella i förväg så de förbereder sig.</div>
           <div class="sh-tags"><span class="sh-tag">🏖️ Strandläge</span><span class="sh-tag">⭐ Lokalt rykte</span><span class="sh-tag">🚗 5 min</span></div>
+          <div class="sh-links">
+            <a class="sh-link sh-link-map" href="https://www.google.com/maps/search/Chiringuito+El+Juncal+Mijas+Costa" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+          </div>
         </div>
       </div>
       <div class="sh-card">
@@ -1104,6 +1257,10 @@
           <div class="sh-addr">La Cala de Mijas — vid stranden</div>
           <div class="sh-desc">La Calas klassiska fiskrestaurang har sedan länge serverat utmärkt paella. Begränsad meny, men det de gör — gör de bra. Beställ paella de mariscos eller paella mixta och njut med havsutsikt.</div>
           <div class="sh-tags"><span class="sh-tag">🐟 Fisk &amp; paella</span><span class="sh-tag">📍 La Cala</span></div>
+          <div class="sh-links">
+            <a class="sh-link sh-link-web" href="https://restaurantetorreonlacala.com" target="_blank" rel="noopener noreferrer">🌐 Hemsida</a>
+            <a class="sh-link sh-link-map" href="https://www.google.com/maps/search/Restaurante+El+Torre%C3%B3n+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1121,6 +1278,9 @@
           <div class="sh-addr">I bergen ovanför La Cala — svårhittat, värt varje minut</div>
           <div class="sh-desc">Rustik bergskrog med spektakulär utsikt och grillat kött över äkta träkol — inga marinader, inga kryddiga såser, bara råvaran. Spanska familjer bokar hit för bröllop och fester. <strong>Måste beställa:</strong> revbensspjäll och T-bone. Kontantbetalning. Ring och boka helst på spanska.</div>
           <div class="sh-tags"><span class="sh-tag">💵 Enbart kontant</span><span class="sh-tag">🏔️ Bergsutsikt</span><span class="sh-tag">⭐ Lokal favorit</span></div>
+          <div class="sh-links">
+            <a class="sh-link sh-link-map" href="https://www.google.com/maps/search/Pe%C3%B1a+Al+Galope+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+          </div>
         </div>
       </div>
       <div class="sh-card">
@@ -1130,6 +1290,9 @@
           <div class="sh-addr">La Cala de Mijas</div>
           <div class="sh-desc">En av få restauranger med direkt kontakt med de lokala fiskarna — menyn baseras på dagens fångst. Menú del día till lokala priser (~€12) är en sällsynhet i ett så turisttätt område. Atmosfären beskrivs som "att äta hemma hos en spansk familj." <strong>Bäst som lunch.</strong></div>
           <div class="sh-tags"><span class="sh-tag">🐟 Färsk fisk</span><span class="sh-tag">🍽️ Menú del día ~€12</span><span class="sh-tag">🇪🇸 Lokal pärla</span></div>
+          <div class="sh-links">
+            <a class="sh-link sh-link-map" href="https://www.google.com/maps/search/Los+Granainos+de+Miguel+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+          </div>
         </div>
       </div>
       <div class="sh-card">
@@ -1139,6 +1302,9 @@
           <div class="sh-addr">La Cala de Mijas — vid strandpromenaden</div>
           <div class="sh-desc">Den chiringuito som La Calas egna invånare väljer för sina sommareftermiddagar. Espetos de sardinas grillas på olivträ — Málagas mest ikoniska rätt tillagad på rätt sätt. Välkomnande, inga krusiduller, barnvänligt. Öppet 9:30–20:30. <strong>Kom tidigt på sommaren.</strong></div>
           <div class="sh-tags"><span class="sh-tag">🐟 Espetos</span><span class="sh-tag">🏖️ Strand</span><span class="sh-tag">👨‍👩‍👧 Familjär</span><span class="sh-tag">🚶 1.2km · 15 min</span></div>
+          <div class="sh-links">
+            <a class="sh-link sh-link-map" href="https://www.google.com/maps/search/Kiosko+Crist%C3%B3bal+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+          </div>
         </div>
       </div>
       <div class="sh-card">
@@ -1148,6 +1314,9 @@
           <div class="sh-addr">Jardín Botánico 32, C/ Abelia 1 — lite bort från centrum</div>
           <div class="sh-desc">Mysig vinbar med kunnig personal och ett imponerande vin­urval. Klassiska tapas, skuggig terrass och känslan av att vara "en som bor här" snarare än turist. Mer kvarterskrog än restaurang — perfekt för en avslappnad kväll utan att det känns som semester. Betyg 4.9 på TripAdvisor.</div>
           <div class="sh-tags"><span class="sh-tag">🍷 Vin & tapas</span><span class="sh-tag">🌿 Hidden gem</span><span class="sh-tag">😌 Avslappnat</span><span class="sh-tag">🚶 1.6km · 20 min</span></div>
+          <div class="sh-links">
+            <a class="sh-link sh-link-map" href="https://www.google.com/maps/search/La+Bodeguita+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+          </div>
         </div>
       </div>
       <div class="sh-card">
@@ -1157,6 +1326,10 @@
           <div class="sh-addr">C. Butiplaya 5 — i bakgatorna bakom strandpromenaden</div>
           <div class="sh-desc">Familjedriven sedan 2009 och av många stamgäster utnämnda till La Calas bästa restaurang. Medelhavsgrill med fokus på kött av hög kvalitet — cochinillo (spädgris), lammstek och saftiga chuletones direkt från vedeldad ugn. 3 500+ recensioner och 4.5 i betyg. <strong>Måste beställa:</strong> cochinillo eller lammstek.</div>
           <div class="sh-tags"><span class="sh-tag">🥩 Vedeldad grill</span><span class="sh-tag">🏡 Familjedriven</span><span class="sh-tag">⭐ Lokal institution</span></div>
+          <div class="sh-links">
+            <a class="sh-link sh-link-web" href="https://elolivodelacala.com" target="_blank" rel="noopener noreferrer">🌐 Hemsida</a>
+            <a class="sh-link sh-link-map" href="https://www.google.com/maps/search/El+Olivo+de+La+Cala+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+          </div>
         </div>
       </div>
       <div class="sh-card">
@@ -1166,6 +1339,9 @@
           <div class="sh-addr">Calle Butiplaya 6 — samma gata som El Olivo</div>
           <div class="sh-desc">Litet familjedrivet ställe med stamgäster som känner personalen vid namn. Tapas, hemgjorda kakor, bra vin och avslappnad atmosfär. Husdjursvänligt, gluten­fria alternativ finns. Passar lika bra för eftermiddagskaffe som för sen kväll med ett glas. Inte turistigt alls — mer hipp än hipster.</div>
           <div class="sh-tags"><span class="sh-tag">☕ Café & tapas</span><span class="sh-tag">🐾 Husdjursvänligt</span><span class="sh-tag">🌙 Kväll</span></div>
+          <div class="sh-links">
+            <a class="sh-link sh-link-map" href="https://www.google.com/maps/search/Simple+Caf%C3%A9+Copas+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1179,6 +1355,9 @@
           <div class="sh-addr">Av. de Rota 4, Las Lagunas de Mijas — 10 min med bil</div>
           <div class="sh-desc">Kasteliansk kolgrill sedan 1994, nu i andra generationen. Vedeldad ugn för spädgris och lammstek, och en av få restauranger i området med en hel sektion flamberade rätter — tillagas i eld vid bordet. Atmosfären är som att kliva rakt in på 80-talet, på bästa möjliga sätt. Stängt söndagar. <strong>Boka i förväg.</strong></div>
           <div class="sh-tags"><span class="sh-tag">🔥 Flamberade rätter</span><span class="sh-tag">🥩 Kasteliansk grill</span><span class="sh-tag">🚗 10 min</span><span class="sh-tag">📞 Boka</span></div>
+          <div class="sh-links">
+            <a class="sh-link sh-link-map" href="https://www.google.com/maps/search/Restaurante+Las+Llaves+Las+Lagunas+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1229,6 +1408,10 @@
           <div class="card-meta">☀️ Frukost/lunch</div>
           <div class="card-meta">🚶 680m · 9 min</div>
         </div>
+        <div class="card-links">
+          <a class="card-link card-link-web" href="https://bsweet.es" target="_blank" rel="noopener noreferrer">🌐 Hemsida</a>
+          <a class="card-link card-link-map" href="https://www.google.com/maps/search/Bsweet+Coffee+Bakery+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+        </div>
       </div>
 
       <div class="card">
@@ -1241,6 +1424,9 @@
         <div class="card-footer">
           <div class="card-meta"><span class="stars">★★★★★</span> Dolt pärla</div>
           <div class="card-meta">🕐 Öppnar tidigt</div>
+        </div>
+        <div class="card-links">
+          <a class="card-link card-link-map" href="https://www.google.com/maps/search/Cafeter%C3%ADa+Casa+Barella+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
         </div>
       </div>
 
@@ -1255,6 +1441,9 @@
           <div class="card-meta"><span class="stars">★★★★☆</span> TripAdvisor</div>
           <div class="card-meta">☕ Hela dagen</div>
         </div>
+        <div class="card-links">
+          <a class="card-link card-link-map" href="https://www.google.com/maps/search/Lemon+Tree+Mijas+Pueblo" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+        </div>
       </div>
 
       <div class="card">
@@ -1267,6 +1456,9 @@
         <div class="card-footer">
           <div class="card-meta"><span class="stars">★★★★☆</span> Wanderlog</div>
           <div class="card-meta">🥐 Frukost</div>
+        </div>
+        <div class="card-links">
+          <a class="card-link card-link-map" href="https://www.google.com/maps/search/Pan+y+Chocolat+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
         </div>
       </div>
 
@@ -1281,6 +1473,9 @@
           <div class="card-meta"><span class="stars">★★★★☆</span> Locals</div>
           <div class="card-meta">☀️ Hela dagen</div>
           <div class="card-meta">🚶 475m · 6 min</div>
+        </div>
+        <div class="card-links">
+          <a class="card-link card-link-map" href="https://www.google.com/maps/search/Caf%C3%A9+de+la+Plaza+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
         </div>
       </div>
 
@@ -1298,6 +1493,53 @@
       </div>
 
     </div>
+
+    <!-- GLASS -->
+    <div class="sh-group-label" style="margin-top:32px;">🍦 Glass — de bästa glasskioskerna i La Cala</div>
+    <div class="sh-grid">
+
+      <div class="sh-card sh-card-highlight">
+        <div class="sh-icon" style="background:linear-gradient(135deg,#4a9fd8,#7abfea);">🍦</div>
+        <div class="sh-info">
+          <div class="sh-name">Heladería Sweet Ice Cream</div>
+          <div class="sh-addr">Calle Reina Fabiola 2, La Cala de Mijas</div>
+          <div class="sh-desc">Hantverksglass (helados artesanos) gjord på plats varje dag. Ett av de mest populära glasskioskerna i La Cala med brett smakurval och en välkomnande stämning. Finns även i Mijas Pueblo.</div>
+          <div class="sh-tags"><span class="sh-tag">🍦 Artisan glass</span><span class="sh-tag">📍 La Cala centrum</span></div>
+          <div class="sh-links">
+            <a class="sh-link sh-link-web" href="https://www.instagram.com/sweeticecream_lacala" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
+            <a class="sh-link sh-link-map" href="https://www.google.com/maps/search/Heladeria+Sweet+Ice+Cream+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sh-card">
+        <div class="sh-icon" style="background:linear-gradient(135deg,#e07040,#f0a060);">🧁</div>
+        <div class="sh-info">
+          <div class="sh-name">Heladería El Deseo</div>
+          <div class="sh-addr">C. Torreón 10, La Cala de Mijas — nära stranden</div>
+          <div class="sh-desc">Välkänt strandbakeri och glasskiosk med generöst smakurval. Berömt för sin profiterolkaka — en riktig lokalfavorit. Öppet 9–23 dagligen, perfekt stopp efter ett dopp i havet.</div>
+          <div class="sh-tags"><span class="sh-tag">🎂 Berömd profiterolkaka</span><span class="sh-tag">🏖️ Strandnära</span><span class="sh-tag">⭐ TripAdvisor 4.0</span></div>
+          <div class="sh-links">
+            <a class="sh-link sh-link-map" href="https://www.google.com/maps/search/Cafeteria+Heladeria+Pasteleria+El+Deseo+La+Cala+de+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sh-card">
+        <div class="sh-icon" style="background:linear-gradient(135deg,#60a060,#90c890);">🍃</div>
+        <div class="sh-info">
+          <div class="sh-name">La Celateria</div>
+          <div class="sh-addr">Av. María Zambrano 1, Las Lagunas de Mijas — 5 min med bil</div>
+          <div class="sh-desc">Hantverksgelato i italiensk stil — helt glutenfritt och laktosfritt. Smaker som Stracciatella, Nata Piñones och Kinder Bueno görs för hand varje dag. Serverar även våfflor och crêpes. Stängt måndagar, öppnar 15:00.</div>
+          <div class="sh-tags"><span class="sh-tag">🌿 Glutenfri & laktosfri</span><span class="sh-tag">🇮🇹 Italiensk stil</span><span class="sh-tag">🚗 5 min</span></div>
+          <div class="sh-links">
+            <a class="sh-link sh-link-map" href="https://www.google.com/maps/search/La+Celateria+Fuengirola+Mijas" target="_blank" rel="noopener noreferrer">📍 Karta</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
   </section>
 
   <!-- ══ UTFLYKTER ══ -->
