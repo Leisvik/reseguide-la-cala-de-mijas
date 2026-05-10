@@ -1,4 +1,4 @@
-const CACHE = 'la-cala-v4';
+const CACHE = 'la-cala-v5';
 const ASSETS = [
   './',
   './index.html',
