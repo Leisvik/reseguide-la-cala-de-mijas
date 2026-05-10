@@ -675,6 +675,45 @@
 
     /* ── GLASS SECTION ── */
     .tag-glass { background: #EAF4FB; color: #0a5a7a; }
+
+    /* ── COPY BUTTON ── */
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      padding: 2px 5px;
+      border-radius: 5px;
+      margin-left: 5px;
+      opacity: 0.3;
+      transition: opacity 0.15s, background 0.15s, border-color 0.15s, color 0.15s;
+      vertical-align: middle;
+      color: var(--text-3);
+      flex-shrink: 0;
+    }
+    .copy-btn svg { display: block; }
+    .copy-btn:hover, .copy-btn:active {
+      opacity: 1;
+      background: var(--bg);
+      border-color: var(--border);
+      color: var(--text-2);
+    }
+    .copy-btn.copied {
+      opacity: 1;
+      color: #4caf50;
+      border-color: #4caf50;
+      background: rgba(76,175,80,0.08);
+    }
+    .card-title, .sh-name, .trip-name {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .card-title .copy-btn-text,
+    .sh-name .copy-btn-text,
+    .trip-name .copy-btn-text { flex: 1; min-width: 0; }
   </style>
 </head>
 <body>
@@ -3636,6 +3675,63 @@
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeLightbox();
   });
+
+  /* ── COPY BUTTONS ── */
+  function makeCopyBtn(text) {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.title = 'Kopiera "' + text + '"';
+    btn.setAttribute('aria-label', 'Kopiera ' + text);
+    btn.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const done = () => {
+        btn.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+          btn.classList.remove('copied');
+        }, 1800);
+      };
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(done).catch(done);
+      } else {
+        const ta = Object.assign(document.createElement('textarea'), { value: text });
+        Object.assign(ta.style, { position: 'fixed', opacity: '0' });
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        done();
+      }
+    });
+    return btn;
+  }
+
+  function initCopyButtons() {
+    /* Card titles, sh-names, trip-names: wrap text in span + append button */
+    ['.card-title', '.sh-name', '.trip-name'].forEach(sel => {
+      document.querySelectorAll(sel).forEach(el => {
+        if (el.querySelector('.copy-btn')) return;
+        const text = el.textContent.trim();
+        const span = document.createElement('span');
+        span.className = 'copy-btn-text';
+        span.textContent = text;
+        el.textContent = '';
+        el.appendChild(span);
+        el.appendChild(makeCopyBtn(text));
+      });
+    });
+
+    /* sh-buy items: strong tag holds the item name */
+    document.querySelectorAll('.sh-buy div > strong').forEach(el => {
+      if (el.querySelector('.copy-btn')) return;
+      const text = el.textContent.trim();
+      el.appendChild(makeCopyBtn(text));
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initCopyButtons);
 </script>
 
 </body>
