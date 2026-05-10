@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#ffc400" rx="10"/>
+  <!-- Person 1 -->
+  <circle cx="8" cy="13" r="5" fill="#c60b1e"/>
+  <rect x="4" y="19" width="8" height="18" rx="2" fill="#c60b1e"/>
+  <rect x="3" y="38" width="4" height="15" rx="2" fill="#c60b1e"/>
+  <rect x="9" y="38" width="4" height="15" rx="2" fill="#c60b1e"/>
+  <!-- Person 2 -->
+  <circle cx="24" cy="13" r="5" fill="#c60b1e"/>
+  <rect x="20" y="19" width="8" height="18" rx="2" fill="#c60b1e"/>
+  <rect x="19" y="38" width="4" height="15" rx="2" fill="#c60b1e"/>
+  <rect x="25" y="38" width="4" height="15" rx="2" fill="#c60b1e"/>
+  <!-- Person 3 -->
+  <circle cx="40" cy="13" r="5" fill="#c60b1e"/>
+  <rect x="36" y="19" width="8" height="18" rx="2" fill="#c60b1e"/>
+  <rect x="35" y="38" width="4" height="15" rx="2" fill="#c60b1e"/>
+  <rect x="41" y="38" width="4" height="15" rx="2" fill="#c60b1e"/>
+  <!-- Person 4 -->
+  <circle cx="56" cy="13" r="5" fill="#c60b1e"/>
+  <rect x="52" y="19" width="8" height="18" rx="2" fill="#c60b1e"/>
+  <rect x="51" y="38" width="4" height="15" rx="2" fill="#c60b1e"/>
+  <rect x="57" y="38" width="4" height="15" rx="2" fill="#c60b1e"/>
+</svg>
