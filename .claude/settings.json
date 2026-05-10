@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "CMD=$(jq -r '.tool_input.command'); echo \"$CMD\" | grep -qE 'git.*commit' || exit 0; SW_FILE=\"/home/user/reseguide-la-cala-de-mijas/sw.js\"; [ -f \"$SW_FILE\" ] || exit 0; CURRENT=$(sed -n \"s/.*la-cala-v\\([0-9]*\\).*/\\1/p\" \"$SW_FILE\" | head -1); [ -n \"$CURRENT\" ] || exit 0; NEXT=$((CURRENT + 1)); sed -i \"s/la-cala-v${CURRENT}/la-cala-v${NEXT}/\" \"$SW_FILE\"; git -C \"/home/user/reseguide-la-cala-de-mijas\" add \"$SW_FILE\""
+            "command": "CMD=$(jq -r '.tool_input.command'); echo \"$CMD\" | grep -qE 'git.*commit' || exit 0; SW_FILE=\"/Users/leisvik/Documents/Claude/Projects/La Cala De Mijas/sw.js\"; [ -f \"$SW_FILE\" ] || exit 0; CURRENT=$(sed -n \"s/.*la-cala-v\\([0-9]*\\).*/\\1/p\" \"$SW_FILE\" | head -1); [ -n \"$CURRENT\" ] || exit 0; NEXT=$((CURRENT + 1)); perl -i -pe \"s/la-cala-v${CURRENT}/la-cala-v${NEXT}/g\" \"$SW_FILE\"; git -C \"/Users/leisvik/Documents/Claude/Projects/La Cala De Mijas\" add \"$SW_FILE\""
           }
         ]
       }
