@@ -676,6 +676,34 @@
     /* ── GLASS SECTION ── */
     .tag-glass { background: #EAF4FB; color: #0a5a7a; }
 
+    /* ── UPDATE BUTTON ── */
+    .update-btn {
+      position: fixed;
+      bottom: max(20px, calc(env(safe-area-inset-bottom) + 16px));
+      right: 18px;
+      z-index: 200;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      box-shadow: var(--shadow-md);
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-2);
+      cursor: pointer;
+      transition: all 0.2s;
+      opacity: 0.7;
+    }
+    .update-btn:hover { opacity: 1; transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .update-btn:active { transform: scale(0.96); }
+    .update-btn.loading { opacity: 0.5; pointer-events: none; }
+    .update-btn svg { transition: transform 0.4s; }
+    .update-btn.loading svg { animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
     /* ── COPY BUTTON ── */
     .copy-btn {
       display: inline-flex;
@@ -3732,7 +3760,30 @@
   }
 
   document.addEventListener('DOMContentLoaded', initCopyButtons);
+
+  /* ── FORCE UPDATE ── */
+  function forceUpdate() {
+    const btn = document.getElementById('update-btn');
+    btn.classList.add('loading');
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(regs => {
+        Promise.all(regs.map(r => r.unregister())).then(() => {
+          window.location.reload(true);
+        });
+      });
+    } else {
+      window.location.reload(true);
+    }
+  }
 </script>
+
+<button id="update-btn" class="update-btn" onclick="forceUpdate()" title="Uppdatera appen">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="23 4 23 10 17 10"/>
+    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+  </svg>
+  Uppdatera app
+</button>
 
 </body>
 </html>
